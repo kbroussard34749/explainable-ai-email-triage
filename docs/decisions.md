@@ -29,6 +29,5 @@ This log records the principal choices for the Week 3 baseline. These are projec
 
 | Decision needed | Evidence required |
 |---|---|
-| Whether class weighting is needed | Final label distribution and unweighted baseline results |
 | Whether to change the default probability threshold | Validation results and the observed cost of false negatives versus false positives |
 | Which preprocessing or model improvements to try next | Baseline error analysis |
