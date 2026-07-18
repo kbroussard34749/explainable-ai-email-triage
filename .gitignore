@@ -1,0 +1,21 @@
+# Raw and generated data
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Generated outputs
+models/*
+!models/.gitkeep
+results/figures/*
+!results/figures/.gitkeep
+results/metrics/*
+!results/metrics/.gitkeep
+
+# Local environments and editor files
+.venv/
+.idea/
+.DS_Store
+**/.DS_Store
+.ipynb_checkpoints/
+__pycache__/

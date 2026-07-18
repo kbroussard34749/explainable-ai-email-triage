@@ -1,0 +1,29 @@
+# Project Decision Log
+
+This log records the principal choices for the Week 3 baseline. These are project implementation decisions unless identified as course requirements.
+
+| Date | Decision | Justification | Status |
+|---|---|---|---|
+| 2026-07-16 | Use binary urgency classification for the Week 3 baseline. | Produces a feasible, measurable baseline while topic and action classification remain later project goals. | Accepted |
+| 2026-07-16 | Combine the email subject and body as model input. | Urgency evidence may appear in either field. | Accepted |
+| 2026-07-16 | Keep the original Enron CSV unchanged and process it with Python. | Preserves the source data and supports repeatable processing of the 1.3 GB file. | Accepted |
+| 2026-07-16 | Create 400 candidates: 300 general and 100 urgency-enriched. | Original planning target before the available implementation time was reassessed. | Superseded 2026-07-17 |
+| 2026-07-17 | Create 200 candidates: 150 general and 50 urgency-enriched. | The assignment specifies no sample minimum. A smaller, carefully reviewed set is more defensible than 400 rushed labels before the July 19 deadline. | Accepted |
+| 2026-07-16 | Record each email's sampling source and prevent overlap between the two queues. | Preserves traceability and prevents duplicate labeling. | Accepted |
+| 2026-07-16 | Use `random_state=42` for sampling and splitting. | Makes the experiment repeatable and avoids choosing a favorable seed after viewing results. | Accepted |
+| 2026-07-16 | Use an 80/20 stratified train/test split. | Reserves held-out evaluation data while preserving class proportions. | Accepted |
+| 2026-07-17 | Use Python 3.11 for the project environment. | It matches the active implementation guide, is installed locally, and has broad compatibility with the required analytical packages. | Accepted |
+| 2026-07-16 | Use TF-IDF with logistic regression as the baseline model. | It is efficient, appropriate for limited labeled text data, and comparatively interpretable. | Accepted |
+| 2026-07-16 | Compare the baseline with a majority-class dummy classifier. | Demonstrates whether the trained model improves on a simple reference prediction. | Accepted |
+| 2026-07-16 | Report accuracy, per-class precision, recall, F1-score, support, a confusion matrix, and urgent false negatives. | Accuracy alone can hide poor performance on a less common urgent class. | Accepted |
+| 2026-07-16 | Give priority to urgent-message recall and false-negative analysis. | The approved proposal identifies missed urgent messages as the primary operational risk. | Accepted |
+| 2026-07-17 | Defer tuning, SHAP/LIME, W&B, APIs, deployment, deep learning, and multi-target modeling. | The Week 3 assignment requires a baseline, initial metrics, justification, improvements, and a 1–2 page report; advanced work must not delay submission. | Accepted |
+| 2026-07-17 | Do not revise the proposal or literature review. | Both received 100/100, and the instructor requested no corrections. | Accepted |
+
+## Open Decisions
+
+| Decision needed | Evidence required |
+|---|---|
+| Whether class weighting is needed | Final label distribution and unweighted baseline results |
+| Whether to change the default probability threshold | Validation results and the observed cost of false negatives versus false positives |
+| Which preprocessing or model improvements to try next | Baseline error analysis |
