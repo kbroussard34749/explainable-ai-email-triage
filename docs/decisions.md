@@ -13,6 +13,7 @@ This log records the principal choices for the Week 3 baseline. These are projec
 | 2026-07-16 | Use `random_state=42` for sampling and splitting. | Makes the experiment repeatable and avoids choosing a favorable seed after viewing results. | Accepted |
 | 2026-07-16 | Use an 80/20 stratified train/test split. | Reserves held-out evaluation data while preserving class proportions. | Accepted |
 | 2026-07-17 | Use Python 3.11 for the project environment. | It matches the active implementation guide, is installed locally, and has broad compatibility with the required analytical packages. | Accepted |
+| 2026-07-18 | Increase the labeling review excerpt from 750 to 2,000 characters and inspect the full message when needed. | The 30-email pilot showed that 750 characters frequently omitted useful reply or thread context. The longer excerpt improves review consistency without exporting complete bodies by default. | Accepted |
 | 2026-07-16 | Use TF-IDF with logistic regression as the baseline model. | It is efficient, appropriate for limited labeled text data, and comparatively interpretable. | Accepted |
 | 2026-07-16 | Compare the baseline with a majority-class dummy classifier. | Demonstrates whether the trained model improves on a simple reference prediction. | Accepted |
 | 2026-07-16 | Report accuracy, per-class precision, recall, F1-score, support, a confusion matrix, and urgent false negatives. | Accuracy alone can hide poor performance on a less common urgent class. | Accepted |

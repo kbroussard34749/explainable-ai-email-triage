@@ -19,7 +19,7 @@ Apply these rules in order.
 | Step | Rule | Result |
 |---|---|---|
 | 1 | The record is empty, malformed, unreadable, or a duplicate. | Exclude |
-| 2 | A 750-character excerpt is insufficient. | Review the full message |
+| 2 | Read the 2,000-character review excerpt. If `excerpt_truncated` is true or the context is insufficient, inspect the full message. | Continue review |
 | 3 | The full message still lacks enough context for a reliable label. | `needs_review` |
 | 4 | The requested action applies entirely to someone other than the recipient. | Usually `nonurgent` |
 | 5 | The recipient must act within 24 hours or by an explicit imminent deadline. | `urgent` |
@@ -40,12 +40,13 @@ Apply these rules in order.
 | A general security newsletter describes threats | Label `nonurgent`. |
 | A message reports a specific compromised account | Label `urgent`. |
 | The message is automatically generated | Judge the required action and consequence, not the sender type. |
+| The review excerpt is truncated or lacks necessary thread context | Inspect the full message before labeling. Use `needs_review` only if the available full context remains insufficient or conflicting. |
 
 ## Review Procedure
 
 1. Assign only one label per record.
 2. Write a brief `label_reason` based on the applicable rule.
-3. Review the full email when the excerpt is insufficient.
+3. Review the full email when the 2,000-character excerpt is truncated or insufficient.
 4. Use `needs_review` only after reviewing all available context.
 5. Exclude unresolved `needs_review` records from initial model training and evaluation.
 6. Record any new recurring ambiguity before changing these version 1.0 rules.
