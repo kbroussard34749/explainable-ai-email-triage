@@ -34,6 +34,16 @@ data/raw/emails.csv
 data/processed/enron_urgency_labels_199_reviewed_v1.xlsx
 ```
 
+This project uses the Kaggle distribution of the Enron Email Dataset provided by Cukierski (2016):
+
+https://www.kaggle.com/datasets/wcukierski/enron-email-dataset
+
+The underlying Enron corpus was originally prepared and distributed by Carnegie Mellon University:
+
+https://www.cs.cmu.edu/~enron/
+
+Download and extract the Kaggle archive, then copy its `emails.csv` file to `data/raw/emails.csv`. The Kaggle distribution is the reproducibility source because it matches the 517,401-record CSV used by this project; the Carnegie Mellon link documents the corpus's original provenance.
+
 The notebook expects the Enron CSV to contain `file` and `message` columns. The approved workbook must contain the reviewed `message_id`, `urgency_label`, and `review_status` fields produced by the documented labeling workflow.
 
 ## Environment Setup
