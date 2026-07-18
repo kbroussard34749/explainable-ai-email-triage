@@ -9,8 +9,12 @@ models/*
 !models/.gitkeep
 results/figures/*
 !results/figures/.gitkeep
+!results/figures/baseline_confusion_matrices.png
 results/metrics/*
 !results/metrics/.gitkeep
+!results/metrics/baseline_model_comparison.csv
+!results/metrics/per_class_metrics.csv
+!results/metrics/split_summary.csv
 
 # Local environments and editor files
 .venv/

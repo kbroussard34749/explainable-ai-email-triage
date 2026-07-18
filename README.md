@@ -21,7 +21,8 @@ docs/decisions.md            Project decisions and justifications
 docs/labeling_guide.md       Deterministic urgency-labeling rules
 docs/week3_baseline_report.md Week 3 short-report source
 notebooks/baseline_model.ipynb Executed labeling and baseline workflow
-results/                     Reserved for generated metrics and figures
+results/figures/             Exported baseline confusion matrices
+results/metrics/             Exported split and performance tables
 ```
 
 ## Local Data Requirements
@@ -71,6 +72,15 @@ python -m jupyter nbconvert \
 ```
 
 The workflow uses `random_state=42` for reproducible sampling and splitting. TF-IDF is fit inside the model pipeline using training data only.
+
+Running the notebook also refreshes these tracked result artifacts:
+
+```text
+results/figures/baseline_confusion_matrices.png
+results/metrics/baseline_model_comparison.csv
+results/metrics/per_class_metrics.csv
+results/metrics/split_summary.csv
+```
 
 ## Week 3 Deliverables
 
