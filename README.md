@@ -17,6 +17,7 @@ The class-balanced model is the primary baseline because the approved dataset co
 ```text
 data/raw/                    Local raw Enron CSV; not tracked by Git
 data/processed/              Local labeling workbooks; not tracked by Git
+data/labels/                 Reviewed label manifest tracked for reproducibility
 docs/decisions.md            Project decisions and justifications
 docs/labeling_guide.md       Deterministic urgency-labeling rules
 docs/week3_baseline_report.md Week 3 short-report source
@@ -27,11 +28,10 @@ results/metrics/             Exported split and performance tables
 
 ## Local Data Requirements
 
-The raw and reviewed datasets are intentionally excluded from Git because of their size and email content. Place these files at the following paths before running the notebook:
+The raw dataset and detailed review workbooks are intentionally excluded from Git because of their size and email content. The minimal reviewed label manifest is included in the repository. Place the downloaded raw file at the following path before running the notebook:
 
 ```text
 data/raw/emails.csv
-data/processed/enron_urgency_labels_199_reviewed_v1.xlsx
 ```
 
 This project uses the Kaggle distribution of the Enron Email Dataset provided by Cukierski (2016):
@@ -44,7 +44,7 @@ https://www.cs.cmu.edu/~enron/
 
 Download and extract the Kaggle archive, then copy its `emails.csv` file to `data/raw/emails.csv`. The Kaggle distribution is the reproducibility source because it matches the 517,401-record CSV used by this project; the Carnegie Mellon link documents the corpus's original provenance.
 
-The notebook expects the Enron CSV to contain `file` and `message` columns. The approved workbook must contain the reviewed `message_id`, `urgency_label`, and `review_status` fields produced by the documented labeling workflow.
+The notebook expects the Enron CSV to contain `file` and `message` columns. It joins those records to the tracked manifest at `data/labels/enron_urgency_labels_v1.csv`. The manifest contains only message identifiers, sampling strata, approved urgency labels, label versions, and review statuses. Email subjects, bodies, excerpts, label reasons, reviewer names, and review notes remain excluded.
 
 ## Environment Setup
 
