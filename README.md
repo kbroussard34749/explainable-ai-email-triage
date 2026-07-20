@@ -21,6 +21,7 @@ data/labels/                 Reviewed label manifest tracked for reproducibility
 docs/decisions.md            Project decisions and justifications
 docs/labeling_guide.md       Deterministic urgency-labeling rules
 docs/week3_baseline_report.md Week 3 short-report source
+docs/week4_improvement_plan.md Ordered optimization and explainability plan
 notebooks/baseline_model.ipynb Executed labeling and baseline workflow
 results/figures/             Exported baseline confusion matrices
 results/metrics/             Exported split and performance tables
@@ -103,3 +104,5 @@ results/metrics/split_summary.csv
 ## Limitations and Next Steps
 
 The held-out set contains only six urgent messages, and urgency-enriched sampling means the labeled class distribution is not an estimate of the full corpus's natural urgency rate. The exploratory comparison also uses the holdout to identify the preferred variant. Planned improvements include expanding the reviewed dataset, checking related-message grouping, reserving untouched evaluation data, evaluating decision thresholds, using cross-validation, and conducting controlled hyperparameter tuning.
+
+The ordered experiment sequence, selection rules, explainability work, and deferred scope are documented in `docs/week4_improvement_plan.md`.
