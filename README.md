@@ -10,7 +10,7 @@ The baseline combines TF-IDF text features with logistic regression. It compares
 - unweighted logistic regression; and
 - class-balanced logistic regression.
 
-The class-balanced model is the primary baseline because the approved dataset contains 169 nonurgent and 30 urgent messages. On the 40-message held-out test set, it achieved 87.5% accuracy, 66.7% urgent precision, 33.3% urgent recall, and 44.4% urgent F1. It missed four of the six urgent test messages, so urgent recall remains the main area for improvement.
+The class-balanced model is the primary Week 3 baseline because the approved dataset contains 169 nonurgent and 30 urgent messages. In an exploratory comparison on the fixed 40-message holdout, it achieved 87.5% accuracy, 66.7% urgent precision, 33.3% urgent recall, and 44.4% urgent F1. It missed four of the six urgent test messages, so urgent recall remains the main area for improvement. Because this same holdout was used to compare variants, the result is preliminary rather than an untouched final performance estimate.
 
 ## Repository Structure
 
@@ -83,6 +83,8 @@ python -m jupyter nbconvert \
 
 The workflow uses `random_state=42` for reproducible sampling and splitting. TF-IDF is fit inside the model pipeline using training data only.
 
+The executed notebook includes a bounded review of all four urgent false negatives. It also documents the exact Kaggle distribution, original Carnegie Mellon provenance, expected input paths, supported Python version, and clean execution command near the top of the notebook.
+
 Running the notebook also refreshes these tracked result artifacts:
 
 ```text
@@ -100,4 +102,4 @@ results/metrics/split_summary.csv
 
 ## Limitations and Next Steps
 
-The held-out set contains only six urgent messages, and urgency-enriched sampling means the labeled class distribution is not an estimate of the full corpus's natural urgency rate. Planned improvements include expanding the reviewed dataset, analyzing urgent false negatives, evaluating decision thresholds, using cross-validation, and conducting controlled hyperparameter tuning.
+The held-out set contains only six urgent messages, and urgency-enriched sampling means the labeled class distribution is not an estimate of the full corpus's natural urgency rate. The exploratory comparison also uses the holdout to identify the preferred variant. Planned improvements include expanding the reviewed dataset, checking related-message grouping, reserving untouched evaluation data, evaluating decision thresholds, using cross-validation, and conducting controlled hyperparameter tuning.
