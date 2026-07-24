@@ -2,6 +2,20 @@
 
 This capstone project develops an explainable email-triage system that identifies urgent messages while keeping a human reviewer in control. The Week 3 implementation establishes a reproducible binary urgency-classification baseline using the Enron Email Dataset.
 
+## Workspace Boundaries
+
+This repository is the authoritative home for code, notebooks, models, reproducible metrics, figures, and technical documentation.
+
+Capstone Week 4 coursework and submission documents are maintained separately at:
+
+```text
+/Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4
+```
+
+Use that course folder for assignment materials, planning notes, report drafts, selected report-ready exports, and the final submission package. Generate technical evidence here first, then copy only the selected tables and figures needed for the report into the course folder's `03_Analysis_Artifacts` directory.
+
+The synchronized ChatGPT project `sources` directory is read-only reference material. Consult those files in place rather than copying the complete collection into this repository. Avoid competing editable copies: this repository is authoritative for technical artifacts, while the course folder is authoritative for report and submission documents.
+
 ## Week 3 Baseline
 
 The baseline combines TF-IDF text features with logistic regression. It compares:

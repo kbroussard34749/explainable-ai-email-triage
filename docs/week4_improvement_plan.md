@@ -16,6 +16,21 @@ The Week 4 submission must include code with experiments and a 2–3 page report
 
 The required minimum is therefore a controlled tuned-model comparison plus one implemented explanation method. Alternative model architectures and external experiment-tracking services are useful extensions, not substitutes for those required outputs.
 
+## Submission Logistics
+
+- Due: July 26, 2026, at 10:59 p.m. CDT
+- Maximum points: 100
+- LMS status when captured: one attempt left
+- Submission interface: WYSIWYG HTML editor plus submission-file uploader
+- Files required: experiment code and a 2–3 page report
+
+The visible assignment instructions do not specify the required code format, report file format, filenames, citation style, AI-use policy, or whether text must be entered in the HTML editor in addition to uploading files. Confirm those details before packaging the submission. Because only one attempt was shown, validate the final code and report locally before using the LMS uploader.
+
+The authoritative local coursework records are:
+
+- `/Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4/02_Planning/Assignments_Week_4.md`
+- `/Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4/02_Planning/Learning_Materials_Week_4.md`
+
 ## Starting Evidence
 
 - Reviewed data: 199 messages (169 nonurgent and 30 urgent)
