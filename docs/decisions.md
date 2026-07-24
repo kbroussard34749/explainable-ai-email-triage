@@ -1,6 +1,8 @@
 # Project Decision Log
 
-This log records the principal choices for the Week 3 baseline. These are project implementation decisions unless identified as course requirements.
+This log records the project decisions, the evidence behind them, and their
+current status. Course requirements are noted when they shape a decision, but
+this is the implementation record rather than the assignment instructions.
 
 | Date | Decision | Justification | Status |
 |---|---|---|---|
@@ -27,12 +29,18 @@ This log records the principal choices for the Week 3 baseline. These are projec
 | 2026-07-19 | Track a minimal reviewed label manifest while excluding email text and detailed review workbooks. | Message identifiers and approved labels are necessary to reproduce the experiment from the public Enron dataset. Excluding subjects, bodies, excerpts, reasons, reviewer names, and notes limits unnecessary republication of real email content. | Accepted |
 | 2026-07-19 | Treat the three-model holdout comparison as exploratory Week 3 evidence. | The same 40-message holdout was used to compare variants and identify the preferred baseline. A future untouched evaluation set or nested validation design is needed for a less selection-sensitive estimate. | Accepted |
 | 2026-07-20 | Preserve the submitted Week 3 baseline and consolidate later improvements in `docs/week4_improvement_plan.md`. | A staged plan keeps optimization and explainability work within the approved proposal while preventing later experiments from overwriting the baseline comparison point. | Accepted |
-| 2026-07-20 | Use bounded `GridSearchCV` with TF-IDF feature engineering and implement SHAP as the primary Week 4 explainability method. | These choices directly satisfy the Week 4 tuning, feature-engineering, metric-comparison, and explainability requirements while remaining reproducible and appropriate for the approved linear NLP baseline. | Planned |
-| 2026-07-20 | Use a versioned local experiment table instead of requiring Weights & Biases. | The assignment requires documented experiments but does not require a specific tracking service; local tracking is sufficient for the planned number of runs and avoids an unnecessary external dependency. | Planned |
+| 2026-07-20 | Use bounded `GridSearchCV` with TF-IDF feature engineering and implement SHAP as the primary Week 4 explainability method. | These choices directly satisfy the Week 4 tuning, feature-engineering, metric-comparison, and explainability requirements while remaining reproducible and appropriate for the approved linear NLP baseline. | Implemented 2026-07-24 |
+| 2026-07-20 | Use a versioned local experiment table instead of requiring Weights & Biases. | The assignment requires documented experiments but does not require a specific tracking service; local tracking is sufficient for the planned number of runs and avoids an unnecessary external dependency. | Implemented 2026-07-24 |
+| 2026-07-24 | Select Week 4 candidates by urgent F1 in five-fold stratified cross-validation on the fixed 159-message Week 3 training partition. | The Week 3 holdout had already influenced baseline selection. Five-fold cross-validation keeps Week 4 model selection separate while preserving the same holdout for a clearly labeled preliminary check. | Accepted |
+| 2026-07-24 | Use a 24-configuration search over logistic-regression `C` and TF-IDF n-grams, `min_df`, and sublinear term frequency. | The search demonstrates both tuning and feature engineering without turning a 199-message study into a large, weakly supported optimization exercise. | Accepted |
+| 2026-07-24 | Keep the selected candidate—`C=0.1`, unigram TF-IDF, `min_df=2`, and sublinear term frequency—for further refinement. | Mean CV urgent F1 rose from 6.7% to 11.4% and urgent recall rose from 4.0% to 8.0%. The preliminary holdout did not worsen on urgent F1, recall, or false negatives, and the candidate uses 2,895 rather than 4,097 features. | Accepted; not deployment approval |
+| 2026-07-24 | Use SHAP for global and local explanations and keep coefficient values in the evidence export. | SHAP meets the Week 4 explainability requirement for the selected linear model. The results are described as learned associations, not causal explanations, and the exports do not include email bodies. | Accepted |
+| 2026-07-24 | Check for exact normalized-text duplicates across the Week 3 training and holdout partitions. | No exact cross-split duplicate pairs were found. The check is limited: related messages, reply chains, and near duplicates remain open evaluation risks. | Accepted |
 
 ## Open Decisions
 
 | Decision needed | Evidence required |
 |---|---|
 | Whether to change the default probability threshold | Validation results and the observed cost of false negatives versus false positives |
-| Which preprocessing or model improvements to try next | Baseline error analysis |
+| Whether to expand the reviewed dataset before additional model comparisons | Labeling capacity, sampling provenance, and a plan for an untouched evaluation design |
+| Whether to model related-message or thread groups explicitly | A reproducible grouping rule and evidence that it changes the evaluation-risk assessment |

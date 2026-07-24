@@ -2,7 +2,11 @@
 
 ## Purpose and Boundary
 
-Week 4 will optimize and explain the submitted Week 3 urgency-classification baseline without changing its recorded results. The Week 3 TF-IDF and class-balanced logistic-regression model remains the comparison point. New experiments will use the same reviewed labels initially, keep urgent-message recall and false negatives as the primary risk measures, and remain within the approved capstone proposal.
+This plan improves and explains the submitted Week 3 urgency-classification
+baseline without changing its recorded results. The Week 3 TF-IDF,
+class-balanced logistic-regression model remains the comparison point. The work
+uses the same reviewed labels, treats urgent recall and false negatives as the
+main risk measures, and stays within the approved capstone scope.
 
 ## Week 4 Assignment Contract
 
@@ -14,7 +18,9 @@ The Week 4 submission must include code with experiments and a 2–3 page report
 - analyzes model improvement and the tradeoffs among performance, efficiency, fairness, and ethical concerns; and
 - documents key findings and whether the selected model should continue to be used.
 
-The required minimum is therefore a controlled tuned-model comparison plus one implemented explanation method. Alternative model architectures and external experiment-tracking services are useful extensions, not substitutes for those required outputs.
+The minimum work is a controlled tuned-model comparison and one implemented
+explanation method. Other architectures and external experiment-tracking tools
+are optional extensions, not substitutes for the required evidence.
 
 ## Submission Logistics
 
@@ -43,6 +49,35 @@ The authoritative local coursework records are:
 - Urgent false negatives: 4
 
 The holdout was used to compare Week 3 variants, so it is preliminary evidence rather than an untouched final estimate.
+
+## Implementation Status — July 24, 2026
+
+The required Week 4 experiment has been executed in
+`notebooks/week4_model_optimization.ipynb`. All model-selection work used
+five-fold stratified cross-validation on the fixed 159-message training
+partition. The baseline and selected candidate were then compared once on the
+preserved 40-message Week 3 holdout and labeled as preliminary evidence.
+
+| Evidence | Frozen Week 3 baseline | Selected Week 4 candidate |
+| --- | ---: | ---: |
+| Mean CV accuracy | 83.7% | 86.2% |
+| Mean CV urgent precision | 20.0% | 20.0% |
+| Mean CV urgent recall | 4.0% | 8.0% |
+| Mean CV urgent F1 | 6.7% | 11.4% |
+| Preliminary holdout urgent F1 | 44.4% | 44.4% |
+| Preliminary holdout urgent recall | 33.3% | 33.3% |
+| Preliminary holdout urgent false negatives | 4 | 4 |
+| TF-IDF features | 4,097 | 2,895 |
+
+The candidate uses logistic-regression `C=0.1`, unigram TF-IDF, `min_df=2`,
+and sublinear term frequency. I retained it for further refinement because it
+improved cross-validation urgent F1 without weakening the preliminary holdout
+safety measures. This is not a deployment decision.
+
+The notebook generated the required experiment ledger, comparison tables,
+confusion matrices, SHAP artifacts, error analysis, grouping-risk check, and
+model decision. See `docs/week4_experiment_record.md` for paths and report-use
+guidance.
 
 ## Required Experiment Sequence
 
@@ -85,7 +120,8 @@ Use a versioned local CSV or Markdown experiment table as the default tracker. E
 - Compare influential features across folds to assess explanation stability.
 - Expand the reviewed dataset using the existing labeling guide and recorded sampling provenance.
 
-These extensions should not delay the required tuned-model comparison, SHAP implementation, clean code, or 2–3 page report.
+These extensions should not delay the required comparison, SHAP work, clean
+code, or the 2–3 page report.
 
 ## Deferred Until the Urgency Model Is Stable
 

@@ -12,7 +12,7 @@ Capstone Week 4 coursework and submission documents are maintained separately at
 /Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4
 ```
 
-Use that course folder for assignment materials, planning notes, report drafts, selected report-ready exports, and the final submission package. Generate technical evidence here first, then copy only the selected tables and figures needed for the report into the course folder's `03_Analysis_Artifacts` directory.
+Use that course folder for assignment materials, planning notes, selected report-ready exports, and the final submission package. Generate technical evidence here first, then copy only the selected tables and figures needed for the report into the course folder's `03_Analysis_Artifacts` directory. The Week 4 report source is deliberately version-controlled in this repository because it directly documents the technical evidence; its final Word submission version remains in the course folder.
 
 The synchronized ChatGPT project `sources` directory is read-only reference material. Consult those files in place rather than copying the complete collection into this repository. Avoid competing editable copies: this repository is authoritative for technical artifacts, while the course folder is authoritative for report and submission documents.
 
@@ -26,6 +26,24 @@ The baseline combines TF-IDF text features with logistic regression. It compares
 
 The class-balanced model is the primary Week 3 baseline because the approved dataset contains 169 nonurgent and 30 urgent messages. In an exploratory comparison on the fixed 40-message holdout, it achieved 87.5% accuracy, 66.7% urgent precision, 33.3% urgent recall, and 44.4% urgent F1. It missed four of the six urgent test messages, so urgent recall remains the main area for improvement. Because this same holdout was used to compare variants, the result is preliminary rather than an untouched final performance estimate.
 
+## Week 4 Optimization Status
+
+Week 4 keeps the submitted baseline intact and adds a focused optimization and
+explainability experiment. The notebook evaluates 24 class-balanced
+TF-IDF/logistic-regression configurations with five-fold stratified
+cross-validation on the fixed 159-message training partition. The 40-message
+Week 3 holdout remains a preliminary comparison, not a tuning target.
+
+The selected candidate uses `C=0.1`, unigram TF-IDF, `min_df=2`, and sublinear
+term frequency. Mean cross-validation urgent F1 rose from 6.7% to 11.4%, and
+urgent recall rose from 4.0% to 8.0%. The preliminary holdout did not change:
+87.5% accuracy, 66.7% urgent precision, 33.3% urgent recall, 44.4% urgent F1,
+and four urgent false negatives. The candidate uses 2,895 features instead of
+4,097, so it is retained for further refinement—not deployment.
+
+The executed technical record is `docs/week4_experiment_record.md`; use it and
+the exported CSVs rather than this summary when reporting results.
+
 ## Repository Structure
 
 ```text
@@ -36,7 +54,10 @@ docs/decisions.md            Project decisions and justifications
 docs/labeling_guide.md       Deterministic urgency-labeling rules
 docs/week3_baseline_report.md Week 3 short-report source
 docs/week4_improvement_plan.md Ordered optimization and explainability plan
+docs/week4_experiment_record.md Executed Week 4 evidence and decision record
+docs/week4_model_optimization_report.md Week 4 report source
 notebooks/baseline_model.ipynb Executed labeling and baseline workflow
+notebooks/week4_model_optimization.ipynb Executed Week 4 optimization workflow
 results/figures/             Exported baseline confusion matrices
 results/metrics/             Exported split and performance tables
 ```
@@ -109,6 +130,39 @@ results/metrics/per_class_metrics.csv
 results/metrics/split_summary.csv
 ```
 
+## Run the Week 4 Experiment
+
+Run the Week 4 notebook from the repository root after installing the updated
+requirements, including SHAP:
+
+```bash
+python -m jupyter nbconvert \
+  --execute \
+  --to notebook \
+  --inplace notebooks/week4_model_optimization.ipynb \
+  --ExecutePreprocessor.timeout=1200 \
+  --ExecutePreprocessor.kernel_name=email-triage-py311
+```
+
+The notebook writes these Week 4 evidence artifacts locally:
+
+```text
+results/metrics/week4_experiment_results.csv
+results/metrics/week4_cv_summary.csv
+results/metrics/week4_model_comparison.csv
+results/metrics/week4_error_analysis.csv
+results/metrics/week4_grouping_risk.csv
+results/metrics/week4_model_decision.csv
+results/figures/week4_confusion_matrices.png
+results/figures/week4_shap_global.png
+results/figures/week4_shap_correct_urgent.png
+results/figures/week4_shap_false_negative.png
+results/figures/week4_shap_false_positive.png
+```
+
+The raw messages remain local. The exported error and SHAP tables use message
+identifiers and model features rather than email bodies.
+
 ## Week 3 Deliverables
 
 - Executed notebook: `notebooks/baseline_model.ipynb`
@@ -117,6 +171,9 @@ results/metrics/split_summary.csv
 
 ## Limitations and Next Steps
 
-The held-out set contains only six urgent messages, and urgency-enriched sampling means the labeled class distribution is not an estimate of the full corpus's natural urgency rate. The exploratory comparison also uses the holdout to identify the preferred variant. Planned improvements include expanding the reviewed dataset, checking related-message grouping, reserving untouched evaluation data, evaluating decision thresholds, using cross-validation, and conducting controlled hyperparameter tuning.
+The held-out set contains only six urgent messages, and urgency-enriched sampling means the labeled class distribution is not an estimate of the full corpus's natural urgency rate. The Week 4 exact normalized-text check found no duplicate message pairs across the training and holdout partitions, but it does not identify near duplicates, reply chains, or related messages. The preliminary holdout still informed Week 3 selection and is not an untouched production estimate.
 
-The ordered experiment sequence, selection rules, explainability work, and deferred scope are documented in `docs/week4_improvement_plan.md`.
+Next evidence should come from more reviewed labels, related-message grouping,
+an untouched evaluation design, and carefully scoped threshold analysis. The
+ordered plan is in `docs/week4_improvement_plan.md`; executed results and the
+current decision are in `docs/week4_experiment_record.md`.
