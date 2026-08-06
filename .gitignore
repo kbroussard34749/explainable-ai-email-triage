@@ -22,6 +22,7 @@ results/metrics/*
 !results/metrics/per_class_metrics.csv
 !results/metrics/split_summary.csv
 !results/metrics/week6_outer_fold_metrics.csv
+!results/metrics/week6_outer_predictions.csv
 !results/metrics/week6_cv_summary.csv
 !results/metrics/week6_threshold_analysis.csv
 !results/metrics/week6_error_analysis.csv
