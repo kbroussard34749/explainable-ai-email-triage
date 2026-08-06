@@ -1,0 +1,67 @@
+{
+  "artifact_sha256": {
+    "results/figures/week6_confusion_matrices.png": "975ef6be9f251470aba0fea5fc26754ff27c74cff9ba61ac5c24681f5e778781",
+    "results/figures/week6_threshold_tradeoff.png": "df93602ec304275331e453bf76d08d6bd6293f0fa072d6ddfa52451234cad389",
+    "results/metrics/week6_cv_summary.csv": "036d081a4e0e4d4bec8de3058f6f2cd8eec504506b8abdafb1be9fc143d3d82b",
+    "results/metrics/week6_outer_fold_metrics.csv": "762b3784a7945076a0ee299b2b22cabd0bb5e857727d94d54b8b2e771a378bf6",
+    "results/metrics/week6_outer_predictions.csv": "90677292b414327fa08c51a72c6cd4c48f32378a09a869f4a2d34c288c086053",
+    "results/metrics/week6_threshold_analysis.csv": "7cf43e25f216b09cecd21c7064909c6a24c4c016e436c5d84feae16742238fe2"
+  },
+  "checkpoint": "week6_nested_cv_threshold_testing",
+  "checkpoint_2_results": {
+    "candidate_final_threshold": 0.45,
+    "frozen_final_threshold": 0.45,
+    "holdout_status": "sealed_not_scored",
+    "reliability_rule_passed": true
+  },
+  "environment": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "python": "3.11.8",
+    "scikit_learn": "1.9.0"
+  },
+  "frozen_candidate": {
+    "classifier__C": 0.1,
+    "classifier__class_weight": "balanced",
+    "classifier__max_iter": 1000,
+    "classifier__random_state": 42,
+    "tfidf__lowercase": true,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": "(1, 1)",
+    "tfidf__stop_words": "english",
+    "tfidf__sublinear_tf": true
+  },
+  "inputs": {
+    "holdout_membership_sha256": "07b797a1d6046030e6e79f43d1a42ae90683ad1ebe5e94ec84549a3689530b03",
+    "label_manifest_path": "data/labels/enron_urgency_labels_v1.csv",
+    "label_manifest_sha256": "1d97ae4369cfe86cd53e34f97e5d3ebc74c6f03e5fb4850b44b8e05885b889b2",
+    "preliminary_holdout_records": 40,
+    "raw_data_bytes": 1426122219,
+    "raw_data_path": "data/raw/emails.csv",
+    "reviewed_records": 199,
+    "training_membership_sha256": "98602138c076caa8b05791d7baee264915da288ce67c20a25feb2f1d52068c54",
+    "training_records": 159
+  },
+  "recorded_at_utc": "2026-08-06T11:12:56.979647+00:00",
+  "validation": {
+    "inner_folds": 4,
+    "outer_folds": 5,
+    "reliability_rule": "adopt a lower threshold only when aggregate outer-CV urgent recall improves and urgent F1 does not decrease",
+    "seed": 42,
+    "selection_rule": [
+      "highest urgent F1",
+      "higher urgent recall",
+      "fewer false positives",
+      "higher threshold if still tied"
+    ],
+    "thresholds": [
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ]
+  }
+}
