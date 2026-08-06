@@ -9,14 +9,25 @@ data/labels/*
 # Generated outputs
 models/*
 !models/.gitkeep
+!models/week6_candidate.joblib
+!models/week6_candidate_metadata.json
 results/figures/*
 !results/figures/.gitkeep
 !results/figures/baseline_confusion_matrices.png
+!results/figures/week6_confusion_matrices.png
+!results/figures/week6_threshold_tradeoff.png
 results/metrics/*
 !results/metrics/.gitkeep
 !results/metrics/baseline_model_comparison.csv
 !results/metrics/per_class_metrics.csv
 !results/metrics/split_summary.csv
+!results/metrics/week6_outer_fold_metrics.csv
+!results/metrics/week6_cv_summary.csv
+!results/metrics/week6_threshold_analysis.csv
+!results/metrics/week6_error_analysis.csv
+!results/metrics/week6_preliminary_holdout_comparison.csv
+!results/metrics/week6_model_decision.csv
+!results/metrics/week6_reproducibility.json
 
 # Local environments and editor files
 .venv/
