@@ -1,0 +1,2 @@
+decision_scope,model_disposition,deployment_approval,shadow_testing_approval,frozen_threshold_for_comparison,selected_threshold_specificity,selected_threshold_positive_rate,holdout_influenced_decision,decision_basis
+training_evidence_before_preliminary_holdout,revise,False,False,0.45,0.0,1.0,False,"Training outer-CV evidence shows that threshold 0.45 predicts every message urgent, while threshold 0.50 misses 22 of 24 urgent messages."

@@ -3,16 +3,33 @@
     "results/figures/week6_confusion_matrices.png": "975ef6be9f251470aba0fea5fc26754ff27c74cff9ba61ac5c24681f5e778781",
     "results/figures/week6_threshold_tradeoff.png": "df93602ec304275331e453bf76d08d6bd6293f0fa072d6ddfa52451234cad389",
     "results/metrics/week6_cv_summary.csv": "036d081a4e0e4d4bec8de3058f6f2cd8eec504506b8abdafb1be9fc143d3d82b",
-    "results/metrics/week6_outer_fold_metrics.csv": "762b3784a7945076a0ee299b2b22cabd0bb5e857727d94d54b8b2e771a378bf6",
+    "results/metrics/week6_error_analysis.csv": "6e6184f6c7c672fad222ddc6aeea09d2ed3d36b064b9960cb6caf01d2b5d1d25",
+    "results/metrics/week6_model_decision.csv": "039b2d9f8143eb761b133bbf39bbb611a28958c6fde999ee7147a33ea7161299",
+    "results/metrics/week6_outer_fold_metrics.csv": "6eb1db9ad01a88bb9750cbd08377460dcb18ca698036b218adfc47302d2d6d8b",
     "results/metrics/week6_outer_predictions.csv": "90677292b414327fa08c51a72c6cd4c48f32378a09a869f4a2d34c288c086053",
     "results/metrics/week6_threshold_analysis.csv": "7cf43e25f216b09cecd21c7064909c6a24c4c016e436c5d84feae16742238fe2"
   },
-  "checkpoint": "week6_nested_cv_threshold_testing",
+  "checkpoint": "week6_training_error_analysis_frozen",
   "checkpoint_2_results": {
     "candidate_final_threshold": 0.45,
     "frozen_final_threshold": 0.45,
     "holdout_status": "sealed_not_scored",
     "reliability_rule_passed": true
+  },
+  "checkpoint_3_training_results": {
+    "average_precision": 0.38849063512415316,
+    "brier_score": 0.2371796827133318,
+    "constant_prevalence_brier_score": 0.12815948736205054,
+    "default_threshold_false_negatives": 22,
+    "frozen_model_disposition": "revise",
+    "holdout_influenced_decision": false,
+    "holdout_status": "sealed_not_scored",
+    "privacy_safe_error_records": 157,
+    "records_from_0_45_to_below_0_50": 157,
+    "roc_auc_ranking_only": 0.7154320987654321,
+    "selected_threshold_false_positives": 135,
+    "urgent_probability_maximum": 0.505380015961392,
+    "urgent_probability_minimum": 0.4642727559111503
   },
   "environment": {
     "numpy": "2.4.6",
@@ -42,7 +59,7 @@
     "training_membership_sha256": "98602138c076caa8b05791d7baee264915da288ce67c20a25feb2f1d52068c54",
     "training_records": 159
   },
-  "recorded_at_utc": "2026-08-06T11:12:56.979647+00:00",
+  "recorded_at_utc": "2026-08-07T05:47:20.731758+00:00",
   "validation": {
     "inner_folds": 4,
     "outer_folds": 5,
