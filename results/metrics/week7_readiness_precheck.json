@@ -1,0 +1,71 @@
+{
+  "checks": {
+    "evidence_hashes": {
+      "docs/week6_experiment_record.md": "3f190b4d25d6bffc7bafd4df785893b54cac2d4e95bf6fbccc7ff1483c960675",
+      "docs/week7_conditional_advancement_gates.md": "10b0165500a20a39aae7181d2d5f9a2bb76213be2b68ee331dc02e23b0de6e48",
+      "docs/week7_readiness_evaluation.md": "3f3777fd2c79cbeee1e85839fc9a46375f182f4ec9d9137a29e3cec76465f88e",
+      "results/metrics/week6_cv_summary.csv": "036d081a4e0e4d4bec8de3058f6f2cd8eec504506b8abdafb1be9fc143d3d82b",
+      "results/metrics/week6_model_decision.csv": "039b2d9f8143eb761b133bbf39bbb611a28958c6fde999ee7147a33ea7161299",
+      "results/metrics/week6_reproducibility.json": "32df46b7c94261cd6a50ad6272500f1b841551ab09a50b37da3e48eb2e50fb0e",
+      "results/metrics/week7_readiness_gate_evaluation.csv": "33644423b426a0c36662be870a6c103aee91b62144b7f75a1f650da3e6bbb6e6"
+    },
+    "executed_notebooks": {
+      "items": [
+        {
+          "code_cells": 23,
+          "error_outputs": [],
+          "passed": true,
+          "path": "notebooks/baseline_model.ipynb",
+          "unexecuted_code_cells": []
+        },
+        {
+          "code_cells": 17,
+          "error_outputs": [],
+          "passed": true,
+          "path": "notebooks/week4_model_optimization.ipynb",
+          "unexecuted_code_cells": []
+        },
+        {
+          "code_cells": 17,
+          "error_outputs": [],
+          "passed": true,
+          "path": "notebooks/week6_testing_debugging.ipynb",
+          "unexecuted_code_cells": []
+        }
+      ],
+      "passed": true
+    },
+    "frozen_decision": {
+      "passed": true,
+      "record": {
+        "decision_basis": "Training outer-CV evidence shows that threshold 0.45 predicts every message urgent, while threshold 0.50 misses 22 of 24 urgent messages.",
+        "decision_scope": "training_evidence_before_preliminary_holdout",
+        "deployment_approval": "False",
+        "frozen_threshold_for_comparison": "0.45",
+        "holdout_influenced_decision": "False",
+        "model_disposition": "revise",
+        "selected_threshold_positive_rate": "1.0",
+        "selected_threshold_specificity": "0.0",
+        "shadow_testing_approval": "False"
+      }
+    },
+    "gate_traceability": {
+      "mismatches": [],
+      "passed": true
+    },
+    "privacy_safe_columns": {
+      "findings": [],
+      "passed": true
+    },
+    "required_evidence": {
+      "missing_or_empty": [],
+      "passed": true
+    }
+  },
+  "deployment_approval": false,
+  "model_reliability_disposition": "revise",
+  "overall_precheck_passed": true,
+  "record_type": "week7_demonstration_readiness_precheck",
+  "scope": "evidence_integrity_reproducibility_and_privacy_precheck",
+  "shadow_testing_approval": false
+}

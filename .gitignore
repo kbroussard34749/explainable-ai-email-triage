@@ -29,6 +29,8 @@ results/metrics/*
 !results/metrics/week6_preliminary_holdout_comparison.csv
 !results/metrics/week6_model_decision.csv
 !results/metrics/week6_reproducibility.json
+!results/metrics/week7_readiness_gate_evaluation.csv
+!results/metrics/week7_readiness_precheck.json
 
 # Local environments and editor files
 .venv/

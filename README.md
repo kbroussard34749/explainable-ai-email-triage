@@ -44,6 +44,44 @@ and four urgent false negatives. The candidate uses 2,895 features instead of
 The executed technical record is `docs/week4_experiment_record.md`; use it and
 the exported CSVs rather than this summary when reporting results.
 
+## Week 6 Reliability Decision
+
+Week 6 froze the Week 4 candidate and evaluated threshold selection with nested
+five-outer/four-inner stratified cross-validation on the 159-message training
+partition. Threshold `0.45` achieved 100% urgent recall only by predicting all
+159 messages urgent, which created 135 false positives. Threshold `0.50`
+identified only 2 of 24 urgent messages and missed 22. The probability scores
+were highly compressed: 157 of 159 fell from `0.45` to below `0.50`.
+
+The candidate disposition is `revise`. It is not approved for deployment or
+shadow testing, and no deployable model artifact was saved. The preserved
+40-message comparison remains preliminary evidence because it influenced
+earlier project work. The controlling technical record is
+`docs/week6_experiment_record.md`.
+
+## Week 7 Conditional Readiness
+
+Week 7 preserves the Week 6 decision and adds provisional capstone readiness
+gates. The planning scenario uses 100 incoming messages per review period and
+allows no more than 10 false alerts per 100 evaluated nonurgent messages. The
+candidate gates require at least 80% urgent recall, 50% urgent precision, and
+60% urgent F1, with a false-positive rate no greater than 10%.
+
+These values are project research assumptions, not course requirements,
+external standards, or stakeholder-validated production objectives. Both Week
+6 operating points fail the combined gates. The repository may advance only
+toward a controlled local research demonstration while the model remains
+`revise`.
+
+The gate definitions and evaluation are recorded in:
+
+```text
+docs/week7_conditional_advancement_gates.md
+docs/week7_readiness_evaluation.md
+results/metrics/week7_readiness_gate_evaluation.csv
+results/metrics/week7_readiness_precheck.json
+```
+
 ## Repository Structure
 
 ```text
@@ -56,10 +94,16 @@ docs/week3_baseline_report.md Week 3 short-report source
 docs/week4_improvement_plan.md Ordered optimization and explainability plan
 docs/week4_experiment_record.md Executed Week 4 evidence and decision record
 docs/week4_model_optimization_report.md Week 4 report source
+docs/week6_experiment_record.md Executed Week 6 testing and decision record
+docs/week7_conditional_advancement_gates.md Provisional Week 7 readiness gates
+docs/week7_readiness_evaluation.md Frozen-candidate gate evaluation
 notebooks/baseline_model.ipynb Executed labeling and baseline workflow
 notebooks/week4_model_optimization.ipynb Executed Week 4 optimization workflow
+notebooks/week6_testing_debugging.ipynb Executed Week 6 reliability workflow
 results/figures/             Exported baseline confusion matrices
 results/metrics/             Exported split and performance tables
+scripts/validate_week7_readiness.py Week 7 evidence-integrity precheck
+tests/test_week7_readiness.py Automated Week 7 precheck tests
 ```
 
 ## Local Data Requirements
@@ -162,6 +206,19 @@ results/figures/week4_shap_false_positive.png
 
 The raw messages remain local. The exported error and SHAP tables use message
 identifiers and model features rather than email bodies.
+
+## Run the Week 7 Readiness Precheck
+
+The precheck validates required evidence, saved notebook execution, the frozen
+Week 6 decision, gate-value traceability, privacy-safe exported columns, and
+source hashes. It does not establish predictive reliability or complete all
+local-demonstration tests.
+
+```bash
+python -m unittest -v tests/test_week7_readiness.py
+python scripts/validate_week7_readiness.py \
+  --output results/metrics/week7_readiness_precheck.json
+```
 
 ## Week 3 Deliverables
 

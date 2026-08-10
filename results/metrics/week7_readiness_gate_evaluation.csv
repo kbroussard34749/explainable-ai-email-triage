@@ -1,0 +1,8 @@
+gate,criterion,threshold_0_45_value,threshold_0_45_result,threshold_0_50_value,threshold_0_50_result,source
+urgent_recall,>=0.80,1.0,pass,0.08333333333333333,fail,results/metrics/week6_cv_summary.csv
+urgent_precision,>=0.50,0.1509433962264151,fail,1.0,pass,results/metrics/week6_cv_summary.csv
+urgent_f1,>=0.60,0.26229508196721313,fail,0.15384615384615385,fail,results/metrics/week6_cv_summary.csv
+false_positive_rate,<=0.10,1.0,fail,0.0,pass,results/metrics/week6_cv_summary.csv
+threshold_stability,no_class_collapse,positive_rate_1.0,fail,positive_rate_0.012578616352201259,fail,results/metrics/week6_cv_summary.csv
+calibration,brier_better_than_constant_reference,0.237_vs_0.128,fail,0.237_vs_0.128,fail,docs/week6_experiment_record.md
+untouched_evaluation,new_uninfluenced_test_set,not_available,not_tested,not_available,not_tested,docs/week6_experiment_record.md
