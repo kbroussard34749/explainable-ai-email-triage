@@ -1,0 +1,2 @@
+selected_model,decision,reason,holdout_interpretation,fairness_limitation,human_oversight
+Week 4 GridSearchCV candidate,retain_week4_candidate,"Candidate improved mean CV urgent F1 without regressing preliminary holdout urgent F1, recall, or false negatives.",Preliminary only; the Week 3 holdout informed prior exploratory selection.,No reliable protected demographic attributes are available for demographic fairness measurement.,"Predictions remain decision support for a human reviewer, not automated email action."

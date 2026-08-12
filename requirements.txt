@@ -7,3 +7,6 @@ pandas
 scikit-learn
 seaborn
 shap
+fastapi==0.141.1
+httpx==0.28.1
+uvicorn==0.52.1

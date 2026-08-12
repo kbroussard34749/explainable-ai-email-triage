@@ -1,3 +1,5 @@
+"""Regression tests for Week 7 evidence integrity and decision boundaries."""
+
 import importlib.util
 import unittest
 from pathlib import Path
@@ -12,6 +14,7 @@ SPEC.loader.exec_module(MODULE)
 
 
 class Week7ReadinessValidationTests(unittest.TestCase):
+    """Prevent later edits from weakening the frozen Week 6 conclusions."""
     @classmethod
     def setUpClass(cls):
         cls.result = MODULE.evaluate(ROOT)

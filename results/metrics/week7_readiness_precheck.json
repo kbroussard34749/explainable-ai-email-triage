@@ -2,12 +2,21 @@
   "checks": {
     "evidence_hashes": {
       "docs/week6_experiment_record.md": "3f190b4d25d6bffc7bafd4df785893b54cac2d4e95bf6fbccc7ff1483c960675",
-      "docs/week7_conditional_advancement_gates.md": "10b0165500a20a39aae7181d2d5f9a2bb76213be2b68ee331dc02e23b0de6e48",
+      "docs/week7_automated_test_report.md": "58411018258fbbbab20f93532544a5e17d72805bc56b81dd55eacd5ce38b6dee",
+      "docs/week7_conditional_advancement_gates.md": "9362471f2ef102c71a52786c088008dcdf4a7338093e1c47e9ff88ad39cd4b1f",
+      "docs/week7_demo_runbook.md": "68033ea71866d675eeae96bd2e3ab9f12b96232c1bdb993eb15c4d7d8c0fe208",
       "docs/week7_readiness_evaluation.md": "3f3777fd2c79cbeee1e85839fc9a46375f182f4ec9d9137a29e3cec76465f88e",
+      "requirements-demo.txt": "092f84c990786e13cb1cf2e7582af1764c362cbf531c78e8a272a8c85c26a0a7",
       "results/metrics/week6_cv_summary.csv": "036d081a4e0e4d4bec8de3058f6f2cd8eec504506b8abdafb1be9fc143d3d82b",
       "results/metrics/week6_model_decision.csv": "039b2d9f8143eb761b133bbf39bbb611a28958c6fde999ee7147a33ea7161299",
       "results/metrics/week6_reproducibility.json": "32df46b7c94261cd6a50ad6272500f1b841551ab09a50b37da3e48eb2e50fb0e",
-      "results/metrics/week7_readiness_gate_evaluation.csv": "33644423b426a0c36662be870a6c103aee91b62144b7f75a1f650da3e6bbb6e6"
+      "results/metrics/week7_demo_model_metadata.json": "a1ac6b6b2bf1a5817a9520e2128df4536556daf581f3fc6de8cfcb86753f48fc",
+      "results/metrics/week7_demo_validation.json": "d072aaf5fa2099361064105da23cf3ab7f13e77fc660cce333e6dabe471ee498",
+      "results/metrics/week7_readiness_gate_evaluation.csv": "33644423b426a0c36662be870a6c103aee91b62144b7f75a1f650da3e6bbb6e6",
+      "scripts/validate_week7_demo.py": "d8bf59e3d349b31803a638f7a3c18e6f27fd8cbc4e001d20887ce457b22f8586",
+      "scripts/validate_week7_readiness.py": "5e6355f28ef74095692aa7ccbe7d3cb3e2311f2db27653c20b6159ed2bf99851",
+      "tests/test_week7_demo.py": "3c52a45a27f88ff12b458e8473aa387378a4f2b5e147115c7550ae0081ee56c3",
+      "tests/test_week7_readiness.py": "d13ee8ef6265a1f26903de51a6bd30148a97eae95bb5300a12de53c5f565fd0a"
     },
     "executed_notebooks": {
       "items": [

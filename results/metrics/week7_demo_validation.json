@@ -1,0 +1,69 @@
+{
+  "artifact_committed": false,
+  "checks": {
+    "artifact_boundary": {
+      "passed": true
+    },
+    "bounded_explanations": {
+      "passed": true
+    },
+    "deterministic_repeated_scoring": {
+      "passed": true,
+      "repetitions_per_case": 20
+    },
+    "input_not_echoed_or_retained_in_result": {
+      "passed": true
+    },
+    "thresholds_visible": {
+      "passed": true
+    }
+  },
+  "deployment_approval": false,
+  "human_review_required": true,
+  "local_performance_observation": {
+    "inference_runs": 60,
+    "maximum_milliseconds": 24.495,
+    "median_milliseconds": 1.511,
+    "minimum_milliseconds": 1.297,
+    "model_load_milliseconds": 4.904,
+    "p95_milliseconds": 1.937,
+    "production_guarantee": false
+  },
+  "model_disposition": "revise",
+  "overall_passed": true,
+  "privacy_safe_case_results": [
+    {
+      "case_id": "deadline",
+      "opposing_feature_count": 2,
+      "supporting_feature_count": 4,
+      "threshold_comparison": {
+        "0.45": "urgent",
+        "0.50": "nonurgent"
+      },
+      "urgent_probability": 0.49527
+    },
+    {
+      "case_id": "routine",
+      "opposing_feature_count": 4,
+      "supporting_feature_count": 2,
+      "threshold_comparison": {
+        "0.45": "urgent",
+        "0.50": "nonurgent"
+      },
+      "urgent_probability": 0.486731
+    },
+    {
+      "case_id": "action",
+      "opposing_feature_count": 2,
+      "supporting_feature_count": 3,
+      "threshold_comparison": {
+        "0.45": "urgent",
+        "0.50": "nonurgent"
+      },
+      "urgent_probability": 0.486482
+    }
+  ],
+  "record_type": "week7_local_research_demo_validation",
+  "research_only": true,
+  "shadow_testing_approval": false
+}

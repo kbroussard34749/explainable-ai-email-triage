@@ -1,0 +1,26 @@
+{
+  "artifact_committed": false,
+  "artifact_role": "local_research_demonstration_only",
+  "deployment_approval": false,
+  "human_review_required": true,
+  "joblib_version": "1.5.3",
+  "label_manifest_sha256": "1d97ae4369cfe86cd53e34f97e5d3ebc74c6f03e5fb4850b44b8e05885b889b2",
+  "local_artifact_sha256": "e4990b5d56d5f2fea0ebada01702165137802417e696c36fad36bec5f0fec096",
+  "model_disposition": "revise",
+  "numpy_version": "2.4.6",
+  "pandas_version": "3.0.5",
+  "privacy": "No email text is included in the metadata or committed artifacts.",
+  "python_scikit_learn_version": "1.9.0",
+  "python_version": "3.11.8",
+  "random_state": 42,
+  "shadow_testing_approval": false,
+  "thresholds_for_demonstration": [
+    0.45,
+    0.5
+  ],
+  "training_label_counts": {
+    "nonurgent": 135,
+    "urgent": 24
+  },
+  "training_records": 159
+}

@@ -1,0 +1,2 @@
+check,training_records,holdout_records,cross_split_exact_duplicate_pairs,limitation
+exact normalized-text fingerprints across training and holdout,159,40,0,"Near duplicates, reply chains, and related messages are not identified by this exact-match check."

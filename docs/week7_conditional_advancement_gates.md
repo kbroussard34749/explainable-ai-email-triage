@@ -21,17 +21,17 @@ These gates determine whether the repository can support the Week 8 local demons
 
 | Gate | Acceptance evidence | Current state |
 |---|---|---|
-| Reproducible setup | A documented clean-environment command installs dependencies and runs the demonstration with fixed configuration and version information. | To validate |
-| Deterministic model workflow | Repeated runs using the same data, configuration, and seed reproduce the recorded outputs within documented numerical tolerance. | Partially supported; demo validation needed |
-| Input validation | Automated tests cover empty input, malformed input, unusually long input, and missing required fields. | To implement |
-| Explainable output | Each demonstration result presents the urgency score, applied threshold, predicted class, and a bounded explanation suitable for human review. | Research explanations exist; demo integration needed |
-| Human review | The interface identifies every result as decision support and requires a person to make or confirm the routing decision. | Design requirement |
-| Privacy controls | Demonstration inputs are synthetic or privacy-screened, and logs exclude email bodies, subjects, excerpts, and reviewer notes. | Design requirement; verify during implementation |
-| Failure handling | The demonstration fails safely and reports a clear error when the model, configuration, or required resource is unavailable. | To implement |
-| Local performance record | Startup and per-message inference times are measured on the demonstration computer and reported as engineering observations, not production guarantees. | To measure |
-| Verification package | Automated tests, a short runbook, configuration record, and sample privacy-safe outputs are saved in the repository. | To create |
+| Reproducible setup | A documented clean-environment command installs dependencies and runs the demonstration with fixed configuration and version information. | Pass for the controlled local environment; commands and versions are recorded in the runbook and metadata. |
+| Deterministic model workflow | Repeated runs using the same data, configuration, and seed reproduce the recorded outputs within documented numerical tolerance. | Pass for repeated inference; three synthetic cases were scored 20 times each with identical recorded scores. |
+| Input validation | Automated tests cover empty input, malformed input, unusually long input, and missing required fields. | Pass; API tests cover empty, omitted, malformed, and overlength requests. |
+| Explainable output | Each demonstration result presents the urgency score, applied threshold, predicted class, and a bounded explanation suitable for human review. | Pass; the interface shows the score, both frozen thresholds, classifications, and bounded feature contributions. |
+| Human review | The interface identifies every result as decision support and requires a person to make or confirm the routing decision. | Pass; every response and the visible interface state `revise`, research-only use, and required human review. |
+| Privacy controls | Demonstration inputs are synthetic or privacy-screened, and logs exclude email bodies, subjects, excerpts, and reviewer notes. | Pass for the implemented workflow; validation confirms response artifacts do not echo inputs and the service does not log message content. |
+| Failure handling | The demonstration fails safely and reports a clear error when the model, configuration, or required resource is unavailable. | Pass; missing-model behavior returns a controlled not-ready health state and HTTP 503 analysis response. |
+| Local performance record | Startup and per-message inference times are measured on the demonstration computer and reported as engineering observations, not production guarantees. | Pass as an engineering observation; 60 local synthetic inferences are recorded with `production_guarantee=false`. |
+| Verification package | Automated tests, a short runbook, configuration record, and sample privacy-safe outputs are saved in the repository. | Pass; the reader-facing automated test report documents all 13 passing tests and links the test code, runbook, model metadata, and privacy-safe validation records. |
 
-Passing Gate A supports the phrase **controlled local research demonstration** only.
+Gate A passed on August 10, 2026, for the controlled local research environment. This supports the phrase **controlled local research demonstration** only. It does not change the Week 6 `revise` disposition or establish Gate B predictive reliability.
 
 ## Gate B: Predictive-reliability advancement
 

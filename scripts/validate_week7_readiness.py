@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the frozen evidence used by the Week 7 readiness assessment."""
+"""Validate the frozen evidence used by the Week 7 readiness assessment.
+
+This precheck asks whether required records are present, internally consistent,
+executed, and privacy-screened. Passing it does not mean the model passed the
+separate predictive-reliability gate.
+"""
 
 from __future__ import annotations
 
@@ -18,11 +23,20 @@ REQUIRED_NOTEBOOKS = (
 REQUIRED_EVIDENCE = (
     "docs/week6_experiment_record.md",
     "docs/week7_conditional_advancement_gates.md",
+    "docs/week7_automated_test_report.md",
+    "docs/week7_demo_runbook.md",
     "docs/week7_readiness_evaluation.md",
     "results/metrics/week6_cv_summary.csv",
     "results/metrics/week6_model_decision.csv",
     "results/metrics/week6_reproducibility.json",
     "results/metrics/week7_readiness_gate_evaluation.csv",
+    "results/metrics/week7_demo_model_metadata.json",
+    "results/metrics/week7_demo_validation.json",
+    "requirements-demo.txt",
+    "scripts/validate_week7_demo.py",
+    "scripts/validate_week7_readiness.py",
+    "tests/test_week7_demo.py",
+    "tests/test_week7_readiness.py",
 )
 PRIVACY_FORBIDDEN_COLUMNS = {
     "subject",
@@ -52,6 +66,7 @@ def sha256(path: Path) -> str:
 
 
 def notebook_check(path: Path, root: Path) -> dict[str, object]:
+    """Confirm that saved code cells executed and contain no saved exceptions."""
     notebook = json.loads(path.read_text(encoding="utf-8"))
     code_cells = [cell for cell in notebook.get("cells", []) if cell.get("cell_type") == "code"]
     unexecuted = [index for index, cell in enumerate(code_cells, start=1) if cell.get("execution_count") is None]
@@ -70,6 +85,7 @@ def notebook_check(path: Path, root: Path) -> dict[str, object]:
 
 
 def evaluate(root: Path) -> dict[str, object]:
+    """Reconcile current readiness records against frozen Week 6 evidence."""
     checks: dict[str, object] = {}
 
     missing = [relative for relative in REQUIRED_EVIDENCE if not (root / relative).is_file() or (root / relative).stat().st_size == 0]
@@ -78,6 +94,8 @@ def evaluate(root: Path) -> dict[str, object]:
     notebooks = [notebook_check(root / relative, root) for relative in REQUIRED_NOTEBOOKS]
     checks["executed_notebooks"] = {"passed": all(item["passed"] for item in notebooks), "items": notebooks}
 
+    # Treat the decision artifact as a contract. A demo must never turn the
+    # historical `revise` result into deployment or shadow-test approval.
     decision_rows = read_csv(root / "results/metrics/week6_model_decision.csv")
     decision = decision_rows[0] if len(decision_rows) == 1 else {}
     decision_passed = (
@@ -88,6 +106,8 @@ def evaluate(root: Path) -> dict[str, object]:
     )
     checks["frozen_decision"] = {"passed": decision_passed, "record": decision}
 
+    # Recompute the Gate B comparison inputs from the saved cross-validation
+    # summary rather than trusting copied values in the Week 7 gate table.
     cv = {row["strategy"]: row for row in read_csv(root / "results/metrics/week6_cv_summary.csv")}
     gate_rows = {row["gate"]: row for row in read_csv(root / "results/metrics/week7_readiness_gate_evaluation.csv")}
     expected = {
@@ -111,6 +131,8 @@ def evaluate(root: Path) -> dict[str, object]:
             mismatches.append({"gate": gate, "expected": values, "actual": actual})
     checks["gate_traceability"] = {"passed": not mismatches, "mismatches": mismatches}
 
+    # This is a schema-level privacy check. It guards tracked artifacts from
+    # common sensitive columns; it does not claim a complete privacy audit.
     privacy_files = (
         "results/metrics/week6_error_analysis.csv",
         "results/metrics/week6_outer_predictions.csv",
@@ -126,6 +148,8 @@ def evaluate(root: Path) -> dict[str, object]:
             privacy_findings.append({"path": relative, "forbidden_columns": forbidden})
     checks["privacy_safe_columns"] = {"passed": not privacy_findings, "findings": privacy_findings}
 
+    # Hashes make later changes visible and tie the precheck to exact evidence
+    # files. They establish integrity and traceability, not scientific validity.
     source_paths = [root / relative for relative in REQUIRED_EVIDENCE]
     checks["evidence_hashes"] = {str(path.relative_to(root)): sha256(path) for path in source_paths if path.is_file()}
     overall = all(value.get("passed", True) for key, value in checks.items() if key != "evidence_hashes")

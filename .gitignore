@@ -14,6 +14,11 @@ models/*
 results/figures/*
 !results/figures/.gitkeep
 !results/figures/baseline_confusion_matrices.png
+!results/figures/week4_confusion_matrices.png
+!results/figures/week4_shap_correct_urgent.png
+!results/figures/week4_shap_false_negative.png
+!results/figures/week4_shap_false_positive.png
+!results/figures/week4_shap_global.png
 !results/figures/week6_confusion_matrices.png
 !results/figures/week6_threshold_tradeoff.png
 results/metrics/*
@@ -21,6 +26,18 @@ results/metrics/*
 !results/metrics/baseline_model_comparison.csv
 !results/metrics/per_class_metrics.csv
 !results/metrics/split_summary.csv
+!results/metrics/week4_cv_summary.csv
+!results/metrics/week4_error_analysis.csv
+!results/metrics/week4_experiment_results.csv
+!results/metrics/week4_grouping_risk.csv
+!results/metrics/week4_metric_deltas.csv
+!results/metrics/week4_model_comparison.csv
+!results/metrics/week4_model_decision.csv
+!results/metrics/week4_shap_correct_urgent.csv
+!results/metrics/week4_shap_false_negative.csv
+!results/metrics/week4_shap_false_positive.csv
+!results/metrics/week4_shap_global_features.csv
+!results/metrics/week4_split_summary.csv
 !results/metrics/week6_outer_fold_metrics.csv
 !results/metrics/week6_outer_predictions.csv
 !results/metrics/week6_cv_summary.csv
@@ -31,6 +48,8 @@ results/metrics/*
 !results/metrics/week6_reproducibility.json
 !results/metrics/week7_readiness_gate_evaluation.csv
 !results/metrics/week7_readiness_precheck.json
+!results/metrics/week7_demo_model_metadata.json
+!results/metrics/week7_demo_validation.json
 
 # Local environments and editor files
 .venv/

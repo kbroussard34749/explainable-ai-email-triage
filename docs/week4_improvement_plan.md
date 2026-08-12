@@ -2,15 +2,15 @@
 
 ## Purpose and Boundary
 
-This plan improves and explains the submitted Week 3 urgency-classification
+This plan improves and explains the established Week 3 urgency-classification
 baseline without changing its recorded results. The Week 3 TF-IDF,
 class-balanced logistic-regression model remains the comparison point. The work
 uses the same reviewed labels, treats urgent recall and false negatives as the
-main risk measures, and stays within the approved capstone scope.
+main risk measures, and stays within the defined capstone scope.
 
-## Week 4 Assignment Contract
+## Week 4 Technical Scope
 
-The Week 4 submission must include code with experiments and a 2–3 page report that:
+The Week 4 work:
 
 - experiments with hyperparameter tuning and feature engineering;
 - evaluates changes in accuracy, precision, recall, and F1-score;
@@ -18,24 +18,9 @@ The Week 4 submission must include code with experiments and a 2–3 page report
 - analyzes model improvement and the tradeoffs among performance, efficiency, fairness, and ethical concerns; and
 - documents key findings and whether the selected model should continue to be used.
 
-The minimum work is a controlled tuned-model comparison and one implemented
+The minimum technical scope is a controlled tuned-model comparison and one implemented
 explanation method. Other architectures and external experiment-tracking tools
 are optional extensions, not substitutes for the required evidence.
-
-## Submission Logistics
-
-- Due: July 26, 2026, at 10:59 p.m. CDT
-- Maximum points: 100
-- LMS status when captured: one attempt left
-- Submission interface: WYSIWYG HTML editor plus submission-file uploader
-- Files required: experiment code and a 2–3 page report
-
-The visible assignment instructions do not specify the required code format, report file format, filenames, citation style, AI-use policy, or whether text must be entered in the HTML editor in addition to uploading files. Confirm those details before packaging the submission. Because only one attempt was shown, validate the final code and report locally before using the LMS uploader.
-
-The authoritative local coursework records are:
-
-- `/Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4/02_Planning/Assignments_Week_4.md`
-- `/Users/keithgb/Documents/College - UC Courses/Courses Summer 2026/Capstone/Week 4/02_Planning/Learning_Materials_Week_4.md`
 
 ## Starting Evidence
 
@@ -52,7 +37,7 @@ The holdout was used to compare Week 3 variants, so it is preliminary evidence r
 
 ## Implementation Status — July 24, 2026
 
-The required Week 4 experiment has been executed in
+The Week 4 experiment has been executed in
 `notebooks/week4_model_optimization.ipynb`. All model-selection work used
 five-fold stratified cross-validation on the fixed 159-message training
 partition. The baseline and selected candidate were then compared once on the
