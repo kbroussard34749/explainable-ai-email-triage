@@ -1,0 +1,267 @@
+1
+00:00:01,562 --> 00:00:10,896
+Este proyecto plantea una pregunta práctica: ¿puede un modelo explicable ayudar a las personas a detectar correos potencialmente urgentes sin fingir que el software debe tomar la decisión final?
+
+2
+00:00:11,188 --> 00:00:18,688
+Presentaré la evidencia recopilada, lo que esa evidencia establece hoy, dónde falla la confiabilidad y qué debe ocurrir después.
+
+3
+00:00:19,938 --> 00:00:22,521
+El problema operativo es sencillo.
+
+4
+00:00:22,813 --> 00:00:28,479
+Los mensajes importantes pueden quedar ocultos en una bandeja de entrada con mucho volumen, pero la urgencia no es solo una palabra clave.
+
+5
+00:00:28,771 --> 00:00:33,854
+Puede depender de fechas límite, solicitudes, relaciones y contexto.
+
+6
+00:00:34,146 --> 00:00:40,396
+Una herramienta útil de clasificación debe destacar mensajes para revisión y mostrar por qué el modelo produjo su puntuación.
+
+7
+00:00:40,688 --> 00:00:43,438
+El límite es tan importante como la predicción.
+
+8
+00:00:43,729 --> 00:00:48,688
+Los falsos negativos pueden ocultar trabajo urgente, mientras que los falsos positivos pueden saturar al revisor.
+
+9
+00:00:48,979 --> 00:00:53,229
+Por esa razón, este proyecto trata el modelo como apoyo para la decisión.
+
+10
+00:00:53,521 --> 00:00:59,563
+El sistema puntúa el mensaje y proporciona una explicación, pero una persona sigue siendo responsable de la decisión de enrutamiento.
+
+11
+00:01:00,813 --> 00:01:04,396
+La demostración prevista para la Semana 8 hará visible ese límite.
+
+12
+00:01:04,688 --> 00:01:15,521
+Un revisor introducirá un mensaje sintético o revisado para proteger la privacidad y recibirá una puntuación de urgencia, clasificaciones en los dos umbrales congelados y una lista breve de características que apoyaron o se opusieron a la puntuación.
+
+13
+00:01:15,812 --> 00:01:23,813
+Esas contribuciones explican el cálculo lineal ajustado; no son explicaciones causales ni demuestran que un mensaje sea urgente.
+
+14
+00:01:24,104 --> 00:01:32,771
+El mismo resultado también indicará que se requiere revisión humana, que la disposición es revisar y que no se aprueban pruebas en sombra ni despliegue en producción.
+
+15
+00:01:33,063 --> 00:01:39,188
+La aplicación está diseñada para no repetir el asunto ni el cuerpo enviados en los resultados de validación guardados.
+
+16
+00:01:39,479 --> 00:01:45,271
+En términos prácticos, la interfaz presentará evidencia para revisión sin automatizar la decisión.
+
+17
+00:01:46,521 --> 00:01:53,688
+La evidencia comienza con el corpus de correo Enron, que contiene 517.401 registros de origen.
+
+18
+00:01:53,979 --> 00:02:03,188
+La evaluación del proyecto utiliza una muestra revisada mucho menor de 199 mensajes: 30 urgentes y 169 no urgentes.
+
+19
+00:02:03,479 --> 00:02:09,438
+Ciento cincuenta y nueve mensajes forman la partición fija de entrenamiento y cuarenta forman una retención preliminar.
+
+20
+00:02:09,729 --> 00:02:16,688
+Esa muestra respalda una evaluación académica controlada, no afirmaciones amplias sobre todas las bandejas de entrada ni sobre la prevalencia en producción.
+
+21
+00:02:16,979 --> 00:02:28,062
+El corpus sin procesar y el material detallado de revisión permanecen fuera del repositorio, mientras que las etiquetas, métricas, cuadernos y registros de decisión protegidos para la privacidad proporcionan una cadena de evidencia auditable.
+
+22
+00:02:29,312 --> 00:02:32,521
+El proyecto avanzó mediante puntos de control de evidencia.
+
+23
+00:02:32,813 --> 00:02:38,896
+Primero, la línea base estableció una referencia reproducible de TF-IDF y regresión logística.
+
+24
+00:02:39,188 --> 00:02:44,146
+Después, la selección del modelo y el trabajo de explicación utilizaron solo la partición de entrenamiento.
+
+25
+00:02:44,438 --> 00:02:52,229
+Para la Semana 6, la validación cruzada anidada separó la selección de la evaluación dentro de esos 159 mensajes de entrenamiento.
+
+26
+00:02:52,521 --> 00:03:00,771
+Cada pliegue externo funcionó como conjunto temporal de evaluación, mientras que los pliegues internos seleccionaron el umbral sin ver las etiquetas del pliegue externo.
+
+27
+00:03:01,062 --> 00:03:05,313
+Luego se combinaron los resultados externos para el análisis de errores y la decisión del modelo.
+
+28
+00:03:05,604 --> 00:03:13,521
+La retención preliminar se examinó solo después de congelar la decisión basada en entrenamiento, pero el trabajo anterior del proyecto ya la había influido.
+
+29
+00:03:13,813 --> 00:03:18,021
+Por lo tanto, es evidencia descriptiva y no una nueva prueba final intacta.
+
+30
+00:03:19,271 --> 00:03:23,188
+La optimización mejoró la evidencia de entrenamiento, pero las ganancias fueron modestas.
+
+31
+00:03:23,479 --> 00:03:38,604
+El F1 urgente medio con validación cruzada aumentó de 6,7 a 11,4 por ciento, la recuperación urgente se duplicó de 4 a 8 por ciento y el número de características TF-IDF seleccionadas disminuyó 29 por ciento.
+
+32
+00:03:38,896 --> 00:03:42,854
+Estos resultados mostraron que el flujo podía ajustar y reproducir un candidato.
+
+33
+00:03:43,146 --> 00:03:46,063
+No establecieron un clasificador confiable.
+
+34
+00:03:46,354 --> 00:03:56,104
+Con el umbral congelado de 0,45, la retención preliminar identificó los seis mensajes urgentes, pero también clasificó como urgentes los 34 mensajes no urgentes.
+
+35
+00:03:56,396 --> 00:04:03,646
+Con 0,50, la misma retención encontró dos de los seis mensajes urgentes, omitió cuatro y creó un falso positivo.
+
+36
+00:04:03,938 --> 00:04:11,146
+En conjunto, esos resultados reforzaron la necesidad de examinar el comportamiento del umbral en vez de tratar la recuperación por sí sola como éxito.
+
+37
+00:04:12,396 --> 00:04:16,062
+Las pruebas de umbral revelaron el problema central de confiabilidad.
+
+38
+00:04:16,354 --> 00:04:24,188
+Con 0,45, la recuperación urgente llegó al 100 por ciento, pero cada uno de los 159 mensajes de entrenamiento fue clasificado como urgente.
+
+39
+00:04:24,479 --> 00:04:30,146
+Eso generó 135 falsos positivos y eliminó el valor de priorizar.
+
+40
+00:04:30,437 --> 00:04:36,229
+Con 0,50 no hubo falsos positivos, pero la recuperación urgente cayó a 8,3 por ciento.
+
+41
+00:04:36,521 --> 00:04:40,896
+El modelo encontró solo 2 de 24 mensajes urgentes y omitió 22.
+
+42
+00:04:41,187 --> 00:04:46,521
+Otra advertencia es que 157 probabilidades quedaron entre los dos umbrales.
+
+43
+00:04:46,812 --> 00:04:53,896
+Por lo tanto, un cambio de solo 0,05 llevó al sistema de casi ninguna predicción urgente a todas las predicciones urgentes.
+
+44
+00:04:54,187 --> 00:04:57,437
+Ningún umbral ofrece un punto operativo defendible.
+
+45
+00:04:58,687 --> 00:05:04,062
+La validación del software de la Semana 7 se evaluó por separado de la confiabilidad predictiva.
+
+46
+00:05:04,354 --> 00:05:07,062
+Las trece pruebas automatizadas aprobaron.
+
+47
+00:05:07,354 --> 00:05:22,812
+Cubrieron la divulgación visible de uso investigativo, entradas válidas e inválidas, comportamiento seguro cuando el modelo no está disponible, ejecución de cuadernos, trazabilidad de métricas, columnas sensibles a la privacidad y preservación de la decisión de revisar.
+
+48
+00:05:23,104 --> 00:05:31,396
+Un validador separado ejecutó tres casos sintéticos veinte veces cada uno, para sesenta inferencias totales, y produjo puntuaciones idénticas dentro de cada caso.
+
+49
+00:05:31,687 --> 00:05:41,479
+Aprobaron cinco verificaciones de la Puerta A: límite del artefacto, puntuación determinista, no retención en el registro de resultados, visibilidad de umbrales y explicaciones acotadas.
+
+50
+00:05:41,771 --> 00:05:47,312
+Esta evidencia establece la preparación del software y de la interfaz para la demostración prevista en la Semana 8.
+
+51
+00:05:47,604 --> 00:05:50,604
+No sustituye las pruebas predictivas con etiquetas.
+
+52
+00:05:51,854 --> 00:05:54,229
+La disposición final es revisar.
+
+53
+00:05:54,521 --> 00:06:00,104
+La Puerta A aprobó como verificación de preparación de ingeniería para la demostración prevista en la Semana 8.
+
+54
+00:06:00,396 --> 00:06:10,729
+La Puerta B falló porque ningún umbral probado cumplió los requisitos combinados de recuperación, precisión, F1, carga de revisión, estabilidad, calibración y evaluación intacta.
+
+55
+00:06:11,021 --> 00:06:16,396
+La revisión humana sigue siendo obligatoria, y las pruebas en sombra y el despliegue en producción permanecen sin aprobación.
+
+56
+00:06:16,687 --> 00:06:19,771
+Esta conclusión no es un resultado fallido del proyecto.
+
+57
+00:06:20,062 --> 00:06:24,021
+Es el hallazgo de confiabilidad producido por el proceso de pruebas.
+
+58
+00:06:24,312 --> 00:06:31,146
+El trabajo demuestra un proceso transparente, expone el modo de falla y evita exagerar un punto operativo débil.
+
+59
+00:06:32,396 --> 00:06:38,896
+Mi recomendación es demostrar el flujo de investigación validado en la Semana 8 sin cambiar la decisión del modelo.
+
+60
+00:06:39,187 --> 00:06:52,521
+El próximo experimento predictivo debe agregar ejemplos revisados, reservar un conjunto de prueba realmente intacto, agrupar mensajes relacionados cuando sea necesario, evaluar la calibración y revisar los falsos negativos y una muestra reproducible de falsos positivos.
+
+61
+00:06:52,812 --> 00:06:58,354
+Deben mantenerse los mismos controles de privacidad, reproducibilidad, revisión humana y aprobación.
+
+62
+00:06:58,646 --> 00:07:06,687
+Solo un candidato versionado por separado que apruebe las puertas predictivas debe considerarse para recomendar una prueba en sombra limitada y supervisada.
+
+63
+00:07:06,979 --> 00:07:13,271
+Incluso ese paso requeriría un registro explícito de aprobación humana; no crearía autorización automática para producción.
+
+64
+00:07:14,521 --> 00:07:25,729
+El repositorio contiene el código, los cuadernos ejecutados, las figuras, las métricas, los registros de experimentos, las pruebas automatizadas, la evidencia de validación y la guía de demostración de la Semana 8.
+
+65
+00:07:26,021 --> 00:07:28,896
+Está disponible en la dirección de GitHub que se muestra aquí.
+
+66
+00:07:29,187 --> 00:07:33,812
+Las preguntas sobre el proyecto pueden enviarse a mi dirección de correo de la University of the Cumberlands.
+
+67
+00:07:34,104 --> 00:07:34,885
+Gracias.

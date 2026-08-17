@@ -1,0 +1,267 @@
+1
+00:00:01,562 --> 00:00:10,896
+This project asks a practical question: can an explainable model help people notice potentially urgent email without pretending that software should make the final decision?
+
+2
+00:00:11,188 --> 00:00:18,688
+I will show the evidence gathered, what that evidence establishes today, where reliability breaks down, and what should happen next.
+
+3
+00:00:19,938 --> 00:00:22,521
+The operational problem is straightforward.
+
+4
+00:00:22,813 --> 00:00:28,479
+Important messages can be buried in a high-volume inbox, but urgency is not just a keyword.
+
+5
+00:00:28,771 --> 00:00:33,854
+It can depend on deadlines, requests, relationships, and context.
+
+6
+00:00:34,146 --> 00:00:40,396
+A useful triage tool should surface messages for attention and show why the model produced its score.
+
+7
+00:00:40,688 --> 00:00:43,438
+The boundary matters just as much as the prediction.
+
+8
+00:00:43,729 --> 00:00:48,688
+False negatives can hide urgent work, while false positives can overwhelm the reviewer.
+
+9
+00:00:48,979 --> 00:00:53,229
+For that reason, this project treats the model as decision support.
+
+10
+00:00:53,521 --> 00:00:59,563
+The system scores the message and provides an explanation, but a person remains responsible for the routing decision.
+
+11
+00:01:00,813 --> 00:01:04,396
+The planned Week 8 demonstration will make that boundary visible.
+
+12
+00:01:04,688 --> 00:01:15,521
+A reviewer will enter a synthetic or privacy-screened message and receive an urgency score, classifications at the two frozen thresholds, and a short list of features that supported or opposed the score.
+
+13
+00:01:15,812 --> 00:01:23,813
+Those contributions explain the fitted linear calculation; they are not causal explanations and they do not prove that a message is urgent.
+
+14
+00:01:24,104 --> 00:01:32,771
+The same result will state that human review is required, the disposition is revise, and neither shadow testing nor production deployment is approved.
+
+15
+00:01:33,063 --> 00:01:39,188
+The application is designed not to echo the submitted subject or body into its saved validation results.
+
+16
+00:01:39,479 --> 00:01:45,271
+In practical terms, the interface will expose evidence for review without automating the decision.
+
+17
+00:01:46,521 --> 00:01:53,688
+The evidence begins with the Enron email corpus, which contains five hundred seventeen thousand, four hundred one source records.
+
+18
+00:01:53,979 --> 00:02:03,188
+The capstone evaluation uses a much smaller reviewed sample of one hundred ninety-nine messages: thirty urgent and one hundred sixty-nine nonurgent.
+
+19
+00:02:03,479 --> 00:02:09,438
+One hundred fifty-nine messages form the fixed training partition, and forty form a preliminary holdout.
+
+20
+00:02:09,729 --> 00:02:16,688
+That sample supports a controlled academic evaluation, not broad claims about every inbox or production prevalence.
+
+21
+00:02:16,979 --> 00:02:28,062
+The raw corpus and detailed review material stay outside the repository, while privacy-screened labels, metrics, notebooks, and decision records provide an auditable evidence trail.
+
+22
+00:02:29,312 --> 00:02:32,521
+The project advanced through controlled checkpoints.
+
+23
+00:02:32,813 --> 00:02:38,896
+First, the baseline established a reproducible T F I D F and logistic-regression reference.
+
+24
+00:02:39,188 --> 00:02:44,146
+Next, model selection and explanation work used only the training partition.
+
+25
+00:02:44,438 --> 00:02:52,229
+For Week 6, nested cross-validation separated selection from evaluation inside those one hundred fifty-nine training messages.
+
+26
+00:02:52,521 --> 00:03:00,771
+Each outer fold acted as a temporary evaluation set, while the inner folds selected the threshold without seeing that outer fold's labels.
+
+27
+00:03:01,062 --> 00:03:05,313
+The outer results were then combined for error analysis and the model decision.
+
+28
+00:03:05,604 --> 00:03:13,521
+The preliminary holdout was examined only after the training-data decision was frozen, but earlier project work had already influenced it.
+
+29
+00:03:13,813 --> 00:03:18,021
+It is therefore descriptive evidence, not a new untouched final test.
+
+30
+00:03:19,271 --> 00:03:23,188
+Optimization improved the training evidence, but the gains were modest.
+
+31
+00:03:23,479 --> 00:03:38,604
+Mean cross-validated urgent F one increased from six point seven percent to eleven point four percent, urgent recall doubled from four percent to eight percent, and the selected T F I D F feature count decreased by twenty-nine percent.
+
+32
+00:03:38,896 --> 00:03:42,854
+These results showed that the workflow could tune and reproduce a candidate.
+
+33
+00:03:43,146 --> 00:03:46,063
+They did not establish a reliable classifier.
+
+34
+00:03:46,354 --> 00:03:56,104
+At the frozen zero point four five threshold, the preliminary holdout identified all six urgent messages but also labeled all thirty-four nonurgent messages urgent.
+
+35
+00:03:56,396 --> 00:04:03,646
+At zero point five zero, the same holdout found two of six urgent messages, missed four, and created one false positive.
+
+36
+00:04:03,938 --> 00:04:11,146
+Together, those results reinforced the need to examine threshold behavior rather than treating recall alone as success.
+
+37
+00:04:12,396 --> 00:04:16,062
+Threshold testing exposed the central reliability problem.
+
+38
+00:04:16,354 --> 00:04:24,188
+At zero point four five, urgent recall reached one hundred percent, but every one of the one hundred fifty-nine training messages was labeled urgent.
+
+39
+00:04:24,479 --> 00:04:30,146
+That created one hundred thirty-five false positives and removed the value of prioritization.
+
+40
+00:04:30,437 --> 00:04:36,229
+At zero point five zero, there were no false positives, but urgent recall fell to eight point three percent.
+
+41
+00:04:36,521 --> 00:04:40,896
+The model found only two of twenty-four urgent messages and missed twenty-two.
+
+42
+00:04:41,187 --> 00:04:46,521
+Another warning is that one hundred fifty-seven probabilities fell between the two thresholds.
+
+43
+00:04:46,812 --> 00:04:53,896
+A change of only zero point zero five therefore moved the system from almost no urgent predictions to all urgent predictions.
+
+44
+00:04:54,187 --> 00:04:57,437
+Neither threshold provides a defensible operating point.
+
+45
+00:04:58,687 --> 00:05:04,062
+Week 7 software validation was evaluated separately from predictive reliability.
+
+46
+00:05:04,354 --> 00:05:07,062
+All thirteen automated tests passed.
+
+47
+00:05:07,354 --> 00:05:22,812
+They covered the visible research-use disclosure, valid and invalid inputs, safe behavior when the model is unavailable, notebook execution, metric traceability, privacy-sensitive columns, and preservation of the revise decision.
+
+48
+00:05:23,104 --> 00:05:31,396
+A separate validator ran three synthetic cases twenty times each, for sixty total inferences, and produced identical scores within each case.
+
+49
+00:05:31,687 --> 00:05:41,479
+Five Gate A checks passed: artifact boundary, deterministic scoring, non-retention in the result record, threshold visibility, and bounded explanations.
+
+50
+00:05:41,771 --> 00:05:47,312
+This evidence establishes software and interface readiness for the planned Week 8 demonstration.
+
+51
+00:05:47,604 --> 00:05:50,604
+It does not substitute for labeled predictive testing.
+
+52
+00:05:51,854 --> 00:05:54,229
+The final disposition is revise.
+
+53
+00:05:54,521 --> 00:06:00,104
+Gate A passed as an engineering-readiness check for the planned Week 8 demonstration.
+
+54
+00:06:00,396 --> 00:06:10,729
+Gate B failed because neither tested threshold met the combined recall, precision, F one, review-burden, stability, calibration, and untouched-evaluation requirements.
+
+55
+00:06:11,021 --> 00:06:16,396
+Human review remains required, and shadow testing and production deployment remain unapproved.
+
+56
+00:06:16,687 --> 00:06:19,771
+This conclusion is not a failed project outcome.
+
+57
+00:06:20,062 --> 00:06:24,021
+It is the reliability finding produced by the testing process.
+
+58
+00:06:24,312 --> 00:06:31,146
+The work demonstrates a transparent pipeline, exposes the failure mode, and prevents a weak operating point from being overstated.
+
+59
+00:06:32,396 --> 00:06:38,896
+My recommendation is to demonstrate the validated research workflow in Week 8 while keeping the model decision unchanged.
+
+60
+00:06:39,187 --> 00:06:52,521
+The next predictive experiment should add reviewed examples, reserve a genuinely untouched test set, use related-message grouping where needed, assess calibration, and review false negatives and a reproducible sample of false positives.
+
+61
+00:06:52,812 --> 00:06:58,354
+The same privacy, reproducibility, human-review, and approval controls should remain in place.
+
+62
+00:06:58,646 --> 00:07:06,687
+Only a separately versioned candidate that passes the predictive gates should be considered for a bounded, supervised shadow-test recommendation.
+
+63
+00:07:06,979 --> 00:07:13,271
+Even that step would require an explicit human approval record; it would not create automatic production authorization.
+
+64
+00:07:14,521 --> 00:07:25,729
+The repository contains the code, executed notebooks, figures, metrics, experiment records, automated tests, validation evidence, and the Week 8 demonstration runbook.
+
+65
+00:07:26,021 --> 00:07:28,896
+It is available at the GitHub address shown here.
+
+66
+00:07:29,187 --> 00:07:33,812
+Questions about the project can be sent to my University of the Cumberlands email address.
+
+67
+00:07:34,104 --> 00:07:34,885
+Thank you.

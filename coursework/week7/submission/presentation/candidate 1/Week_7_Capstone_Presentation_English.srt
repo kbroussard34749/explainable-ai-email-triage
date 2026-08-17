@@ -1,0 +1,363 @@
+1
+00:00:00,000 --> 00:00:04,960
+This project examines whether a transparent machine-learning system can help people identify
+
+2
+00:00:04,960 --> 00:00:07,440
+urgent email without creating unacceptable risk.
+
+3
+00:00:07,790 --> 00:00:11,076
+I will explain the problem, how I evaluated the model,
+
+4
+00:00:11,076 --> 00:00:15,019
+what testing revealed, and why the software is ready to demonstrate even
+
+5
+00:00:15,019 --> 00:00:16,990
+though the model still requires revision.
+
+6
+00:00:18,990 --> 00:00:23,310
+The operational need is straightforward. Urgent messages can be missed when people
+
+7
+00:00:23,310 --> 00:00:25,470
+must sort a high-volume inbox manually.
+
+8
+00:00:25,820 --> 00:00:30,216
+The model is intended to prioritize review, not replace judgment or take
+
+9
+00:00:30,216 --> 00:00:32,780
+action on email. Both error directions matter.
+
+10
+00:00:33,130 --> 00:00:36,696
+A false negative can hide urgent work, while a false positive adds
+
+11
+00:00:36,696 --> 00:00:39,370
+review burden and can reduce trust in the tool.
+
+12
+00:00:39,720 --> 00:00:43,982
+For that reason, explanations and human oversight are part of the design
+
+13
+00:00:43,982 --> 00:00:46,824
+boundary. Every score remains a recommendation for review,
+
+14
+00:00:46,824 --> 00:00:48,600
+not an automatic routing decision.
+
+15
+00:00:50,600 --> 00:00:53,567
+The source collection contains five hundred seventeen thousand,
+
+16
+00:00:53,567 --> 00:00:58,018
+four hundred one Enron email records, but the modeling evidence is intentionally
+
+17
+00:00:58,018 --> 00:00:58,760
+much narrower.
+
+18
+00:00:59,110 --> 00:01:02,438
+I used one hundred ninety-nine manually reviewed messages:
+
+19
+00:01:02,438 --> 00:01:05,350
+one hundred sixty-nine nonurgent and thirty urgent.
+
+20
+00:01:05,700 --> 00:01:10,218
+A fixed stratified split placed one hundred fifty-nine messages in training and
+
+21
+00:01:10,218 --> 00:01:12,100
+forty in a preliminary holdout.
+
+22
+00:01:12,450 --> 00:01:16,697
+Urgency-enriched sampling supplied enough positive examples for the research exercise. Therefore,
+
+23
+00:01:16,697 --> 00:01:21,330
+the labeled class share is not an estimate of a normal mailbox.
+
+24
+00:01:21,680 --> 00:01:26,023
+The sample supports controlled experimentation, but not broad operational reliability.
+
+25
+00:01:26,023 --> 00:01:30,800
+Raw message content and reviewer notes remain excluded from the repository.
+
+26
+00:01:31,150 --> 00:01:35,870
+Demographic fairness was not tested because protected demographic fields were unavailable.
+
+27
+00:01:37,870 --> 00:01:40,590
+The project advanced through controlled checkpoints.
+
+28
+00:01:40,940 --> 00:01:45,560
+The Week three baseline established a reproducible T F I D F
+
+29
+00:01:45,560 --> 00:01:47,100
+and logistic-regression reference model.
+
+30
+00:01:47,450 --> 00:01:54,050
+Week four tested twenty-four class-balanced configurations using five-fold cross-validation and added global
+
+31
+00:01:54,050 --> 00:01:56,250
+and case-level SHAP explanations.
+
+32
+00:01:56,600 --> 00:02:01,021
+Week six separated threshold selection from evaluation through nested cross-validation,
+
+33
+00:02:01,021 --> 00:02:05,000
+then froze the decision before the preliminary holdout comparison.
+
+34
+00:02:05,350 --> 00:02:08,070
+Week seven added a separate readiness framework.
+
+35
+00:02:08,420 --> 00:02:13,333
+Gate A tests whether the software can support a safe local demonstration.
+
+36
+00:02:13,333 --> 00:02:15,380
+Gate B tests predictive reliability.
+
+37
+00:02:15,730 --> 00:02:19,690
+This separation prevents a functioning interface from being treated as proof that
+
+38
+00:02:19,690 --> 00:02:21,010
+the classifier is reliable.
+
+39
+00:02:23,010 --> 00:02:28,050
+I tested twenty-four class-balanced configurations and selected the strongest training candidate.
+
+40
+00:02:28,400 --> 00:02:32,579
+Its mean cross-validated urgent F one increased from six point seven percent
+
+41
+00:02:32,579 --> 00:02:34,320
+to eleven point four percent.
+
+42
+00:02:34,670 --> 00:02:38,830
+Urgent recall also doubled, rising from four percent to eight percent.
+
+43
+00:02:39,180 --> 00:02:43,596
+The feature space decreased from four thousand ninety-seven to two thousand eight
+
+44
+00:02:43,596 --> 00:02:44,700
+hundred ninety-five features.
+
+45
+00:02:45,050 --> 00:02:48,037
+However, the preliminary holdout result did not improve.
+
+46
+00:02:48,037 --> 00:02:51,023
+Urgent F one remained forty-four point four percent,
+
+47
+00:02:51,023 --> 00:02:54,010
+with four false negatives and one false positive.
+
+48
+00:02:54,360 --> 00:02:58,346
+The optimization made the model smaller and improved the training evidence,
+
+49
+00:02:58,346 --> 00:03:00,520
+but it did not establish generalization.
+
+50
+00:03:00,870 --> 00:03:04,630
+The complete selected configuration is documented in the repository.
+
+51
+00:03:06,630 --> 00:03:10,710
+Week six threshold testing exposed the central reliability problem.
+
+52
+00:03:11,060 --> 00:03:15,592
+At zero point four five, urgent recall reached one hundred percent,
+
+53
+00:03:15,592 --> 00:03:19,300
+but only because every training message was labeled urgent.
+
+54
+00:03:19,650 --> 00:03:23,712
+That created one hundred thirty-five false positives and reduced triage to reviewing
+
+55
+00:03:23,712 --> 00:03:24,050
+everything.
+
+56
+00:03:24,400 --> 00:03:28,816
+At zero point five zero, the model produced no false positives in
+
+57
+00:03:28,816 --> 00:03:29,920
+the outer-fold predictions.
+
+58
+00:03:30,270 --> 00:03:33,330
+However, it found only two of twenty-four urgent messages.
+
+59
+00:03:33,330 --> 00:03:37,070
+Recall fell to eight point three percent, with twenty-two false negatives.
+
+60
+00:03:37,420 --> 00:03:41,671
+The probability scores were also highly compressed. One hundred fifty-seven of one
+
+61
+00:03:41,671 --> 00:03:45,923
+hundred fifty-nine out-of-fold probabilities fell from zero point four five to below
+
+62
+00:03:45,923 --> 00:03:47,340
+zero point five zero.
+
+63
+00:03:47,690 --> 00:03:51,610
+A small threshold change therefore flips nearly the entire workload.
+
+64
+00:03:51,960 --> 00:03:55,964
+Neither operating point balances urgent-message detection with a manageable review burden.
+
+65
+00:03:55,964 --> 00:03:59,240
+Changing the threshold alone does not solve the problem.
+
+66
+00:04:01,240 --> 00:04:03,960
+The evidence supports two different conclusions.
+
+67
+00:04:04,310 --> 00:04:08,070
+First, Gate A passed. All thirteen automated tests passed.
+
+68
+00:04:08,420 --> 00:04:12,740
+The validator also completed sixty deterministic synthetic inference runs.
+
+69
+00:04:13,090 --> 00:04:18,999
+Those runs checked visible thresholds, bounded explanations, privacy-safe output, input validation,
+
+70
+00:04:18,999 --> 00:04:20,610
+and human-review status.
+
+71
+00:04:20,960 --> 00:04:24,720
+They also confirmed safe failure when the local model is unavailable.
+
+72
+00:04:25,070 --> 00:04:29,342
+Second, Gate B failed, so the model remains in the revise category.
+
+73
+00:04:29,342 --> 00:04:32,190
+In practical terms, the model still needs revision.
+
+74
+00:04:32,540 --> 00:04:37,134
+The working Fast API demonstration shows that the research workflow can be
+
+75
+00:04:37,134 --> 00:04:37,900
+demonstrated repeatably.
+
+76
+00:04:38,250 --> 00:04:43,230
+It does not establish predictive reliability. It does not authorize shadow testing
+
+77
+00:04:43,230 --> 00:04:44,890
+or approve production deployment.
+
+78
+00:04:45,240 --> 00:04:50,340
+No automated email action is permitted, and the locally generated model artifact
+
+79
+00:04:50,340 --> 00:04:52,040
+remains excluded from Git.
+
+80
+00:04:54,040 --> 00:04:58,200
+The next work should improve the evidence, not expand deployment claims.
+
+81
+00:04:58,550 --> 00:05:02,657
+Increase the reviewed sample, preserve a truly untouched final test set,
+
+82
+00:05:02,657 --> 00:05:07,137
+and investigate calibration, vocabulary coverage, and the failure patterns behind both error
+
+83
+00:05:07,137 --> 00:05:07,510
+types.
+
+84
+00:05:07,860 --> 00:05:12,889
+Then repeat the controlled evaluation under the same privacy, reproducibility, workload,
+
+85
+00:05:12,889 --> 00:05:14,260
+and human-approval gates.
+
+86
+00:05:14,610 --> 00:05:19,250
+The software workflow is ready to demonstrate, while the classifier still needs
+
+87
+00:05:19,250 --> 00:05:21,570
+better evidence before any operational recommendation.
+
+88
+00:05:23,570 --> 00:05:26,370
+The project repository is shown on this slide.
+
+89
+00:05:26,720 --> 00:05:31,459
+It contains the code, executed notebooks, test results, decision records,
+
+90
+00:05:31,459 --> 00:05:32,880
+and reproducibility guidance.
+
+91
+00:05:33,230 --> 00:05:36,030
+I can be reached at the university email shown. Thank you.

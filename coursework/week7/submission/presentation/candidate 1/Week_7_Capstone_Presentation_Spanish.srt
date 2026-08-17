@@ -1,0 +1,363 @@
+1
+00:00:00,000 --> 00:00:04,960
+Este proyecto examina si un sistema transparente de aprendizaje automático puede ayudar a identificar
+
+2
+00:00:04,960 --> 00:00:07,440
+correos urgentes sin crear un riesgo inaceptable.
+
+3
+00:00:07,790 --> 00:00:11,076
+Explicaré el problema, cómo evalué el modelo,
+
+4
+00:00:11,076 --> 00:00:15,019
+qué revelaron las pruebas y por qué el software está listo para demostrarse,
+
+5
+00:00:15,019 --> 00:00:16,990
+aunque el modelo todavía requiere revisión.
+
+6
+00:00:18,990 --> 00:00:23,310
+La necesidad operativa es clara. Los mensajes urgentes pueden pasarse por alto cuando las personas
+
+7
+00:00:23,310 --> 00:00:25,470
+deben clasificar manualmente una bandeja de entrada con gran volumen.
+
+8
+00:00:25,820 --> 00:00:30,216
+El modelo busca priorizar la revisión, no reemplazar el juicio humano ni tomar
+
+9
+00:00:30,216 --> 00:00:32,780
+medidas sobre el correo. Ambos tipos de error son importantes.
+
+10
+00:00:33,130 --> 00:00:36,696
+Un falso negativo puede ocultar trabajo urgente; un falso positivo aumenta
+
+11
+00:00:36,696 --> 00:00:39,370
+la carga de revisión y puede reducir la confianza en la herramienta.
+
+12
+00:00:39,720 --> 00:00:43,982
+Por eso, las explicaciones y la supervisión humana forman parte de los límites
+
+13
+00:00:43,982 --> 00:00:46,824
+del diseño. Cada puntuación sigue siendo una recomendación para revisión,
+
+14
+00:00:46,824 --> 00:00:48,600
+no una decisión automática de enrutamiento.
+
+15
+00:00:50,600 --> 00:00:53,567
+La colección original contiene quinientos diecisiete mil
+
+16
+00:00:53,567 --> 00:00:58,018
+cuatrocientos un correos de Enron, pero la evidencia de modelado es intencionalmente
+
+17
+00:00:58,018 --> 00:00:58,760
+mucho más limitada.
+
+18
+00:00:59,110 --> 00:01:02,438
+Utilicé ciento noventa y nueve mensajes revisados manualmente:
+
+19
+00:01:02,438 --> 00:01:05,350
+ciento sesenta y nueve no urgentes y treinta urgentes.
+
+20
+00:01:05,700 --> 00:01:10,218
+Una división estratificada fija asignó ciento cincuenta y nueve mensajes al entrenamiento y
+
+21
+00:01:10,218 --> 00:01:12,100
+cuarenta a un conjunto preliminar de reserva.
+
+22
+00:01:12,450 --> 00:01:16,697
+El muestreo enriquecido con casos urgentes aportó suficientes ejemplos positivos. Por lo tanto,
+
+23
+00:01:16,697 --> 00:01:21,330
+la proporción de clases etiquetadas no estima una bandeja de entrada normal.
+
+24
+00:01:21,680 --> 00:01:26,023
+La muestra permite experimentación controlada, pero no demuestra fiabilidad operativa amplia.
+
+25
+00:01:26,023 --> 00:01:30,800
+El contenido original y las notas de revisión permanecen fuera del repositorio.
+
+26
+00:01:31,150 --> 00:01:35,870
+No se evaluó la equidad demográfica porque no había campos demográficos protegidos.
+
+27
+00:01:37,870 --> 00:01:40,590
+El proyecto avanzó mediante puntos de control definidos.
+
+28
+00:01:40,940 --> 00:01:45,560
+La línea base de la semana tres estableció un modelo reproducible de TF-IDF
+
+29
+00:01:45,560 --> 00:01:47,100
+y regresión logística como referencia.
+
+30
+00:01:47,450 --> 00:01:54,050
+La semana cuatro probó veinticuatro configuraciones con clases balanceadas mediante validación cruzada de cinco pliegues y añadió explicaciones SHAP
+
+31
+00:01:54,050 --> 00:01:56,250
+globales y para casos individuales.
+
+32
+00:01:56,600 --> 00:02:01,021
+La semana seis separó la selección del umbral de la evaluación mediante validación cruzada anidada,
+
+33
+00:02:01,021 --> 00:02:05,000
+y luego fijó la decisión antes de comparar el conjunto preliminar de reserva.
+
+34
+00:02:05,350 --> 00:02:08,070
+La semana siete añadió un marco de preparación independiente.
+
+35
+00:02:08,420 --> 00:02:13,333
+Gate A comprueba si el software permite una demostración local segura.
+
+36
+00:02:13,333 --> 00:02:15,380
+Gate B comprueba la fiabilidad predictiva.
+
+37
+00:02:15,730 --> 00:02:19,690
+Esta separación evita que una interfaz funcional se interprete como prueba de que
+
+38
+00:02:19,690 --> 00:02:21,010
+el clasificador es fiable.
+
+39
+00:02:23,010 --> 00:02:28,050
+Probé veinticuatro configuraciones con clases balanceadas y seleccioné la mejor candidata de entrenamiento.
+
+40
+00:02:28,400 --> 00:02:32,579
+Su F1 urgente medio con validación cruzada aumentó del 6,7 por ciento
+
+41
+00:02:32,579 --> 00:02:34,320
+al 11,4 por ciento.
+
+42
+00:02:34,670 --> 00:02:38,830
+El recall urgente también se duplicó, del 4 al 8 por ciento.
+
+43
+00:02:39,180 --> 00:02:43,596
+El espacio de características disminuyó de cuatro mil noventa y siete a dos mil ochocientas
+
+44
+00:02:43,596 --> 00:02:44,700
+noventa y cinco características.
+
+45
+00:02:45,050 --> 00:02:48,037
+Sin embargo, el resultado preliminar de reserva no mejoró.
+
+46
+00:02:48,037 --> 00:02:51,023
+El F1 urgente se mantuvo en 44,4 por ciento,
+
+47
+00:02:51,023 --> 00:02:54,010
+con cuatro falsos negativos y un falso positivo.
+
+48
+00:02:54,360 --> 00:02:58,346
+La optimización redujo el modelo y mejoró la evidencia de entrenamiento,
+
+49
+00:02:58,346 --> 00:03:00,520
+pero no demostró generalización.
+
+50
+00:03:00,870 --> 00:03:04,630
+La configuración seleccionada completa está documentada en el repositorio.
+
+51
+00:03:06,630 --> 00:03:10,710
+Las pruebas de umbral de la semana seis revelaron el problema central de fiabilidad.
+
+52
+00:03:11,060 --> 00:03:15,592
+Con 0,45, el recall urgente llegó al 100 por ciento,
+
+53
+00:03:15,592 --> 00:03:19,300
+pero solo porque cada mensaje de entrenamiento fue clasificado como urgente.
+
+54
+00:03:19,650 --> 00:03:23,712
+Esto produjo ciento treinta y cinco falsos positivos y convirtió la priorización en revisar
+
+55
+00:03:23,712 --> 00:03:24,050
+todo.
+
+56
+00:03:24,400 --> 00:03:28,816
+Con 0,50, el modelo no produjo falsos positivos en
+
+57
+00:03:28,816 --> 00:03:29,920
+las predicciones de los pliegues externos.
+
+58
+00:03:30,270 --> 00:03:33,330
+Sin embargo, encontró solo dos de veinticuatro mensajes urgentes.
+
+59
+00:03:33,330 --> 00:03:37,070
+El recall cayó al 8,3 por ciento, con veintidós falsos negativos.
+
+60
+00:03:37,420 --> 00:03:41,671
+Las probabilidades también estaban muy comprimidas. Ciento cincuenta y siete de ciento
+
+61
+00:03:41,671 --> 00:03:45,923
+cincuenta y nueve probabilidades fuera de pliegue quedaron entre 0,45 y menos de
+
+62
+00:03:45,923 --> 00:03:47,340
+0,50.
+
+63
+00:03:47,690 --> 00:03:51,610
+Por tanto, un pequeño cambio de umbral altera casi toda la carga de trabajo.
+
+64
+00:03:51,960 --> 00:03:55,964
+Ningún punto operativo equilibra la detección urgente con una carga de revisión manejable.
+
+65
+00:03:55,964 --> 00:03:59,240
+Cambiar solo el umbral no resuelve el problema.
+
+66
+00:04:01,240 --> 00:04:03,960
+La evidencia respalda dos conclusiones diferentes.
+
+67
+00:04:04,310 --> 00:04:08,070
+Primero, Gate A fue aprobado. Las trece pruebas automatizadas pasaron.
+
+68
+00:04:08,420 --> 00:04:12,740
+El validador también completó sesenta ejecuciones deterministas de inferencia sintética.
+
+69
+00:04:13,090 --> 00:04:18,999
+Estas comprobaron umbrales visibles, explicaciones limitadas, resultados seguros para la privacidad, validación de entradas
+
+70
+00:04:18,999 --> 00:04:20,610
+y estado de revisión humana.
+
+71
+00:04:20,960 --> 00:04:24,720
+También confirmaron un fallo seguro cuando el modelo local no está disponible.
+
+72
+00:04:25,070 --> 00:04:29,342
+Segundo, Gate B falló, por lo que el modelo permanece en la categoría «revisar».
+
+73
+00:04:29,342 --> 00:04:32,190
+En términos prácticos, el modelo todavía necesita revisión.
+
+74
+00:04:32,540 --> 00:04:37,134
+La demostración funcional con FastAPI muestra que el flujo de investigación puede
+
+75
+00:04:37,134 --> 00:04:37,900
+demostrarse de manera repetible.
+
+76
+00:04:38,250 --> 00:04:43,230
+No demuestra fiabilidad predictiva. No autoriza pruebas en modo sombra
+
+77
+00:04:43,230 --> 00:04:44,890
+ni aprueba un despliegue en producción.
+
+78
+00:04:45,240 --> 00:04:50,340
+No se permite ninguna acción automatizada sobre correos, y el artefacto local del modelo
+
+79
+00:04:50,340 --> 00:04:52,040
+permanece excluido de Git.
+
+80
+00:04:54,040 --> 00:04:58,200
+El siguiente trabajo debe mejorar la evidencia, no ampliar las afirmaciones de despliegue.
+
+81
+00:04:58,550 --> 00:05:02,657
+Se debe aumentar la muestra revisada, preservar un conjunto final de prueba realmente intacto
+
+82
+00:05:02,657 --> 00:05:07,137
+e investigar la calibración, la cobertura del vocabulario y los patrones detrás de ambos tipos
+
+83
+00:05:07,137 --> 00:05:07,510
+de error.
+
+84
+00:05:07,860 --> 00:05:12,889
+Después, se debe repetir la evaluación controlada con los mismos controles de privacidad, reproducibilidad y carga de trabajo,
+
+85
+00:05:12,889 --> 00:05:14,260
+además de aprobación humana.
+
+86
+00:05:14,610 --> 00:05:19,250
+El flujo de software está listo para demostrarse, pero el clasificador aún necesita
+
+87
+00:05:19,250 --> 00:05:21,570
+mejor evidencia antes de cualquier recomendación operativa.
+
+88
+00:05:23,570 --> 00:05:26,370
+El repositorio del proyecto aparece en esta diapositiva.
+
+89
+00:05:26,720 --> 00:05:31,459
+Contiene el código, los cuadernos ejecutados, resultados de pruebas, registros de decisiones
+
+90
+00:05:31,459 --> 00:05:32,880
+y orientación para la reproducibilidad.
+
+91
+00:05:33,230 --> 00:05:36,030
+Pueden contactarme en el correo universitario mostrado. Gracias.

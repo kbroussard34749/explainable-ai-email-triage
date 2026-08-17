@@ -1,0 +1,16 @@
+Candidate 3 measured runtime: 7:36.4
+Delivery: clear stakeholder briefing with a four-percent pacing adjustment for metric-heavy sections
+
+Slide 1 - Opening and decision question - 0:00-0:20
+Slide 2 - Operational problem and human-control boundary - 0:20-1:01
+Slide 3 - Preview of the planned Week 8 demonstration - 1:01-1:47
+Slide 4 - Data and evidence boundary - 1:47-2:29
+Slide 5 - Methodology and nested evaluation separation - 2:29-3:19
+Slide 6 - Training gains and both preliminary holdout thresholds - 3:19-4:12
+Slide 7 - Threshold and error analysis - 4:12-4:59
+Slide 8 - Week 7 software validation and Gate A - 4:59-5:52
+Slide 9 - Disposition and Gate B decision - 5:52-6:32
+Slide 10 - Recommendation and Week 8 transition - 6:32-7:15
+Slide 11 - Repository, contact, and close - 7:15-7:36
+
+The PowerPoint speaker notes use the same measured transition windows and include repository-relative source blocks.
