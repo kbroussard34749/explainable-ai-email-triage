@@ -1,0 +1,199 @@
+1
+00:00:00,000 --> 00:00:07,360
+This demonstration shows the Explainable AI Email Triage application
+operating as a controlled local research prototype.
+
+2
+00:00:07,680 --> 00:00:11,840
+The system is designed to support human review of potentially urgent
+email.
+
+3
+00:00:12,160 --> 00:00:18,160
+It does not make an autonomous routing decision, and it is not approved
+for shadow testing or production deployment.
+
+4
+00:00:19,010 --> 00:00:22,770
+The notice at the top of the application states the most important
+boundary.
+
+5
+00:00:23,090 --> 00:00:27,730
+The current model disposition is revise, and every result requires human
+review.
+
+6
+00:00:28,050 --> 00:00:36,210
+Gate A passed because the software workflow can load the verified local
+artifact, accept a bounded input, return a repeatable result, and fail
+safely.
+
+7
+00:00:36,530 --> 00:00:41,730
+That engineering result does not mean the classifier has passed the
+separate predictive-reliability gate.
+
+8
+00:00:42,580 --> 00:00:46,020
+For this demonstration, I am using a fully synthetic message.
+
+9
+00:00:46,340 --> 00:00:52,100
+The subject is “Synthetic deadline reminder,” and the body asks for
+review before 3 PM today.
+
+10
+00:00:52,420 --> 00:00:57,220
+No private email, reviewer note, address, or other personal information
+is being entered.
+
+11
+00:00:58,070 --> 00:00:59,590
+I will select Analyze.
+
+12
+00:00:59,910 --> 00:01:04,790
+The model returns an urgency probability of approximately 49.5 percent.
+
+13
+00:01:05,110 --> 00:01:09,430
+At the 0.45 threshold, the message is classified as urgent.
+
+14
+00:01:09,750 --> 00:01:14,470
+At the 0.50 threshold, the same message is classified as nonurgent.
+
+15
+00:01:14,790 --> 00:01:18,790
+This disagreement is the main finding the interface is designed to make
+visible.
+
+16
+00:01:19,110 --> 00:01:27,270
+A small threshold change alters the classification, so the application
+does not hide that uncertainty or choose an operating threshold for the
+user.
+
+17
+00:01:28,120 --> 00:01:34,920
+The next section shows features that supported the urgent and nonurgent
+sides of the fitted logistic-regression calculation.
+
+18
+00:01:35,240 --> 00:01:38,680
+These contributions help explain how this model produced the score.
+
+19
+00:01:39,000 --> 00:01:43,720
+They are not causal explanations, and they do not prove why a message is
+truly urgent.
+
+20
+00:01:44,570 --> 00:01:48,330
+The required-handling card keeps a person in the decision process.
+
+21
+00:01:48,650 --> 00:01:54,810
+The result remains marked revise, the input-retention field says no, and
+deployment approval remains no.
+
+22
+00:01:55,130 --> 00:02:01,450
+The application returns a research result for review, but it does not
+route the message or save the submitted subject and body.
+
+23
+00:02:02,300 --> 00:02:05,820
+The validated workflow also includes safe failure behavior.
+
+24
+00:02:06,140 --> 00:02:10,860
+This second local instance was intentionally started with a model path
+that does not exist.
+
+25
+00:02:11,180 --> 00:02:15,980
+Its health response reports not ready and explains that the local
+research artifact was not found.
+
+26
+00:02:16,300 --> 00:02:21,500
+The disposition remains revise, and deployment and shadow-testing
+approval remain false.
+
+27
+00:02:21,820 --> 00:02:29,180
+If an analysis is requested in this condition, the service returns an
+unavailable response instead of loading a different model or fabricating
+a prediction.
+
+28
+00:02:29,500 --> 00:02:36,140
+I used a separate path and port for this check, so the verified model
+artifact was not deleted, renamed, or altered.
+
+29
+00:02:36,990 --> 00:02:40,830
+Before preparing this recording, I reran the documented validation.
+
+30
+00:02:41,150 --> 00:02:43,710
+All 13 automated tests passed.
+
+31
+00:02:44,030 --> 00:02:54,750
+The validator also completed 60 deterministic synthetic inference runs
+and confirmed visible thresholds, bounded explanations, privacy-safe
+output, and the research-only artifact boundary.
+
+32
+00:02:55,600 --> 00:03:00,240
+This demonstration satisfies the Week 8 requirement to show the AI model
+in action.
+
+33
+00:03:00,560 --> 00:03:04,000
+It also preserves the evidence boundary established during the project.
+
+34
+00:03:04,320 --> 00:03:17,200
+The software is ready for a repeatable local demonstration, while the
+classifier still needs more labeled data, a newly reserved untouched
+test set, and stronger reliability evidence before any operational
+recommendation should be considered.
+
+35
+00:03:18,050 --> 00:03:24,610
+For anyone reviewing the evidence, the best place to start is the
+Project Review Guide linked from the repository's main README.
+
+36
+00:03:24,930 --> 00:03:31,090
+The guide connects the written conclusions in the docs folder to the
+exact CSV and JSON evidence in the results folder.
+
+37
+00:03:31,410 --> 00:03:41,650
+The Week 6 experiment record supports the threshold findings, while the
+Week 7 automated test report and demo validation file support the
+13-test and 60-inference results.
+
+38
+00:03:41,970 --> 00:03:47,330
+The demonstration runbook explains how to reproduce the application and
+safe-failure check.
+
+39
+00:03:47,650 --> 00:03:53,650
+This structure makes each statement in the demonstration traceable
+without requiring the reviewer to search through the repository.
+
+40
+00:03:54,500 --> 00:04:00,180
+Thank you, Professor, and thank you to everyone in the class for your
+time, feedback, and support throughout this project.
+
+41
+00:04:00,500 --> 00:04:03,860
+I appreciate the opportunity to share the final demonstration.

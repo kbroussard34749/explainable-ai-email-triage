@@ -1,0 +1,206 @@
+1
+00:00:00,000 --> 00:00:09,640
+Esta demostración muestra la aplicación Explainable AI Email Triage
+funcionando como un prototipo de investigación local y controlado.
+
+2
+00:00:09,960 --> 00:00:17,120
+El sistema está diseñado para apoyar la revisión humana de correos
+electrónicos potencialmente urgentes.
+
+3
+00:00:17,440 --> 00:00:26,160
+No toma decisiones autónomas de enrutamiento y no está aprobado para
+pruebas en modo sombra ni para implementación en producción.
+
+4
+00:00:27,010 --> 00:00:32,650
+El aviso en la parte superior de la aplicación establece el límite más
+importante.
+
+5
+00:00:32,970 --> 00:00:38,570
+La disposición actual del modelo es revise, y cada resultado requiere
+revisión humana.
+
+6
+00:00:38,890 --> 00:00:49,730
+Gate A fue aprobado porque el flujo de software puede cargar el
+artefacto local verificado, aceptar una entrada limitada, devolver un
+resultado repetible y fallar de forma segura.
+
+7
+00:00:50,050 --> 00:00:58,010
+Ese resultado de ingeniería no significa que el clasificador haya
+aprobado la evaluación separada de confiabilidad predictiva.
+
+8
+00:00:58,860 --> 00:01:03,540
+Para esta demostración, estoy usando un mensaje completamente sintético.
+
+9
+00:01:03,860 --> 00:01:12,020
+El asunto es “Recordatorio de fecha límite sintético”, y el cuerpo
+solicita una revisión antes de las tres de la tarde de hoy.
+
+10
+00:01:12,340 --> 00:01:19,220
+No se ingresa ningún correo privado, nota de revisión, dirección ni otra
+información personal.
+
+11
+00:01:20,070 --> 00:01:22,430
+Seleccionaré Analyze.
+
+12
+00:01:22,750 --> 00:01:29,270
+El modelo devuelve una probabilidad de urgencia de aproximadamente 49.5
+por ciento.
+
+13
+00:01:29,590 --> 00:01:35,190
+Con el umbral 0.45, el mensaje se clasifica como urgente.
+
+14
+00:01:35,510 --> 00:01:41,470
+Con el umbral 0.50, el mismo mensaje se clasifica como no urgente.
+
+15
+00:01:41,790 --> 00:01:47,470
+Este desacuerdo es el hallazgo principal que la interfaz está diseñada
+para hacer visible.
+
+16
+00:01:47,790 --> 00:01:56,750
+Un pequeño cambio en el umbral altera la clasificación, por lo que la
+aplicación no oculta esa incertidumbre ni elige un umbral operativo por
+el usuario.
+
+17
+00:01:57,600 --> 00:02:05,960
+La siguiente sección muestra las características que respaldaron los
+lados urgente y no urgente del cálculo de regresión logística ajustado.
+
+18
+00:02:06,280 --> 00:02:11,640
+Estas contribuciones ayudan a explicar cómo este modelo produjo la
+puntuación.
+
+19
+00:02:11,960 --> 00:02:17,640
+No son explicaciones causales y no demuestran por qué un mensaje es
+realmente urgente.
+
+20
+00:02:18,490 --> 00:02:24,050
+La tarjeta de manejo requerido mantiene a una persona dentro del proceso
+de decisión.
+
+21
+00:02:24,370 --> 00:02:32,810
+El resultado permanece marcado como revise, el campo de retención de
+entrada indica no y la aprobación de implementación también indica no.
+
+22
+00:02:33,130 --> 00:02:41,730
+La aplicación devuelve un resultado de investigación para revisión, pero
+no enruta el mensaje ni guarda el asunto y el cuerpo enviados.
+
+23
+00:02:42,580 --> 00:02:47,100
+El flujo validado también incluye un comportamiento de falla segura.
+
+24
+00:02:47,420 --> 00:02:53,020
+Esta segunda instancia local se inició intencionalmente con una ruta de
+modelo que no existe.
+
+25
+00:02:53,340 --> 00:03:00,340
+Su respuesta de estado informa not ready y explica que no se encontró el
+artefacto local de investigación.
+
+26
+00:03:00,660 --> 00:03:08,900
+La disposición permanece revise, y las aprobaciones para implementación
+y pruebas en modo sombra permanecen falsas.
+
+27
+00:03:09,220 --> 00:03:18,460
+Si se solicita un análisis en esta condición, el servicio devuelve una
+respuesta de no disponibilidad en lugar de cargar otro modelo o fabricar
+una predicción.
+
+28
+00:03:18,780 --> 00:03:28,340
+Usé una ruta y un puerto separados para esta comprobación, por lo que el
+artefacto verificado no fue eliminado, renombrado ni modificado.
+
+29
+00:03:29,190 --> 00:03:33,670
+Antes de preparar esta grabación, volví a ejecutar la validación
+documentada.
+
+30
+00:03:33,990 --> 00:03:37,830
+Las 13 pruebas automatizadas fueron aprobadas.
+
+31
+00:03:38,150 --> 00:03:53,990
+El validador también completó 60 ejecuciones deterministas de inferencia
+sintética y confirmó umbrales visibles, explicaciones limitadas,
+resultados seguros para la privacidad y el límite de uso exclusivo para
+investigación del artefacto.
+
+32
+00:03:54,840 --> 00:04:02,440
+Esta demostración cumple con el requisito de la Semana 8 de mostrar el
+modelo de inteligencia artificial en funcionamiento.
+
+33
+00:04:02,760 --> 00:04:06,800
+También conserva el límite de evidencia establecido durante el proyecto.
+
+34
+00:04:07,120 --> 00:04:24,960
+El software está listo para una demostración local repetible, mientras
+que el clasificador todavía necesita más datos etiquetados, un nuevo
+conjunto de prueba reservado y sin utilizar, y evidencia de
+confiabilidad más sólida antes de considerar cualquier recomendación
+operativa.
+
+35
+00:04:25,810 --> 00:04:33,810
+Para revisar la evidencia, el mejor punto de partida es Project Review
+Guide, vinculado desde el README principal del repositorio.
+
+36
+00:04:34,130 --> 00:04:43,130
+La guía conecta las conclusiones escritas de la carpeta docs con la
+evidencia exacta en archivos CSV y JSON de la carpeta results.
+
+37
+00:04:43,450 --> 00:04:59,650
+El registro del experimento de la Semana 6 respalda los hallazgos sobre
+los umbrales, mientras que el informe de pruebas automatizadas de la
+Semana 7 y el archivo de validación de la demostración respaldan los
+resultados de 13 pruebas y 60 inferencias.
+
+38
+00:04:59,970 --> 00:05:06,130
+El demonstration runbook explica cómo reproducir la aplicación y la
+comprobación de falla segura.
+
+39
+00:05:06,450 --> 00:05:14,370
+Esta estructura permite rastrear cada afirmación de la demostración sin
+exigir que el revisor busque por todo el repositorio.
+
+40
+00:05:15,220 --> 00:05:22,220
+Gracias, Profesor, y gracias a todos en la clase por su tiempo, sus
+comentarios y su apoyo durante este proyecto.
+
+41
+00:05:22,540 --> 00:05:26,140
+Aprecio la oportunidad de compartir la demostración final.

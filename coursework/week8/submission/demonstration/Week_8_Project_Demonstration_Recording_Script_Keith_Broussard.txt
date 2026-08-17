@@ -1,0 +1,23 @@
+Week 8 Project Demonstration — Recording Script
+
+This demonstration shows the Explainable AI Email Triage application operating as a controlled local research prototype. The system is designed to support human review of potentially urgent email. It does not make an autonomous routing decision, and it is not approved for shadow testing or production deployment.
+
+The notice at the top of the application states the most important boundary. The current model disposition is revise, and every result requires human review. Gate A passed because the software workflow can load the verified local artifact, accept a bounded input, return a repeatable result, and fail safely. That engineering result does not mean the classifier has passed the separate predictive-reliability gate.
+
+For this demonstration, I am using a fully synthetic message. The subject is “Synthetic deadline reminder,” and the body asks for review before 3 PM today. No private email, reviewer note, address, or other personal information is being entered.
+
+I will select Analyze. The model returns an urgency probability of approximately 49.5 percent. At the 0.45 threshold, the message is classified as urgent. At the 0.50 threshold, the same message is classified as nonurgent. This disagreement is the main finding the interface is designed to make visible. A small threshold change alters the classification, so the application does not hide that uncertainty or choose an operating threshold for the user.
+
+The next section shows features that supported the urgent and nonurgent sides of the fitted logistic-regression calculation. These contributions help explain how this model produced the score. They are not causal explanations, and they do not prove why a message is truly urgent.
+
+The required-handling card keeps a person in the decision process. The result remains marked revise, the input-retention field says no, and deployment approval remains no. The application returns a research result for review, but it does not route the message or save the submitted subject and body.
+
+The validated workflow also includes safe failure behavior. This second local instance was intentionally started with a model path that does not exist. Its health response reports not ready and explains that the local research artifact was not found. The disposition remains revise, and deployment and shadow-testing approval remain false. If an analysis is requested in this condition, the service returns an unavailable response instead of loading a different model or fabricating a prediction. I used a separate path and port for this check, so the verified model artifact was not deleted, renamed, or altered.
+
+Before preparing this recording, I reran the documented validation. All 13 automated tests passed. The validator also completed 60 deterministic synthetic inference runs and confirmed visible thresholds, bounded explanations, privacy-safe output, and the research-only artifact boundary.
+
+This demonstration satisfies the Week 8 requirement to show the AI model in action. It also preserves the evidence boundary established during the project. The software is ready for a repeatable local demonstration, while the classifier still needs more labeled data, a newly reserved untouched test set, and stronger reliability evidence before any operational recommendation should be considered.
+
+For anyone reviewing the evidence, the best place to start is the Project Review Guide linked from the repository's main README. The guide connects the written conclusions in the docs folder to the exact CSV and JSON evidence in the results folder. The Week 6 experiment record supports the threshold findings, while the Week 7 automated test report and demo validation file support the 13-test and 60-inference results. The demonstration runbook explains how to reproduce the application and safe-failure check. This structure makes each statement in the demonstration traceable without requiring the reviewer to search through the repository.
+
+Thank you, Professor, and thank you to everyone in the class for your time, feedback, and support throughout this project. I appreciate the opportunity to share the final demonstration.
