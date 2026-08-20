@@ -31,9 +31,23 @@ limitations.
 | Week 4 optimization | Evaluated 24 configurations using five-fold stratified cross-validation and added SHAP analysis. | The selected candidate improved training-CV urgent F1 but did not improve the preliminary holdout result. |
 | Week 6 reliability | Used five-outer/four-inner nested cross-validation, threshold testing, and error analysis. | Threshold `0.45` labeled every message urgent; threshold `0.50` missed 22 of 24 urgent messages. The disposition is `revise`. |
 | Week 7 readiness | Added explicit readiness gates, automated validation, and a local FastAPI demonstration. | The software workflow passed its local-demonstration gate; predictive, shadow-testing, and production gates remain unpassed. |
+| Week 8 delivery | Packaged the validated demonstration with English-authoritative narration, selectable multilingual subtitles, language-specific editions, scripts, and QA evidence. | The final package demonstrates the Gate A workflow while preserving the `revise` decision, required human review, and no deployment or shadow-testing approval. |
 
 The preliminary 40-message holdout informed earlier model comparisons and is
 not presented as untouched final evidence.
+
+## Final Week 8 Demonstration
+
+For the shortest faculty review path, start with the
+[`Week 8 demonstration package guide`](coursework/week8/submission/demonstration/README.md),
+then open the recommended
+[`English-authoritative MP4 with selectable multilingual subtitles`](coursework/week8/submission/demonstration/Week_8_Project_Demonstration_Keith_Broussard_Multilingual_Subtitles.mp4).
+The package also includes English, Spanish, Hindi, and Simplified Chinese
+language-specific editions, external captions, and narration scripts.
+
+The demonstration is a presentation of the validated research workflow. It
+does not replace the executed notebooks and saved metrics as predictive
+evidence, and it does not change the model disposition from `revise`.
 
 ## Choose a Review Path
 
@@ -50,6 +64,7 @@ not presented as untouched final evidence.
 - Automated test purpose and results: [`docs/week7_automated_test_report.md`](docs/week7_automated_test_report.md)
 - Readiness criteria: [`docs/week7_conditional_advancement_gates.md`](docs/week7_conditional_advancement_gates.md)
 - Readiness conclusion: [`docs/week7_readiness_evaluation.md`](docs/week7_readiness_evaluation.md)
+- Final Week 8 demonstration: [`coursework/week8/submission/demonstration/README.md`](coursework/week8/submission/demonstration/README.md)
 - Notebook workflow and output map: [`notebooks/README.md`](notebooks/README.md)
 - Chronological decisions: [`docs/decisions.md`](docs/decisions.md)
 

@@ -23,7 +23,7 @@ The preliminary 40-message holdout informed earlier project work and is not pres
 Run each notebook from the repository root in the order shown below. A notebook
 creates `results/metrics/` and `results/figures/` when needed, then refreshes
 its same-named outputs. The full commands and environment setup are in the root
-[`README.md`](../README.md#environment-setup).
+[`README.md`](../README.md#reproduce-the-analysis).
 
 ### 1. Week 3 baseline
 
