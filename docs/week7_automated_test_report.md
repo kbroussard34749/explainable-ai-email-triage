@@ -53,7 +53,7 @@ This separation is intentional. Engineering tests can demonstrate that the appli
 | Threshold visibility | Every case reported classifications at both 0.45 and 0.50. | Pass |
 | Bounded explanations | Each positive and negative feature list remained limited to five entries. | Pass |
 
-The 60 local inference observations had a median of 3.017 milliseconds, a 95th-percentile observation of 8.305 milliseconds, and a maximum of 35.426 milliseconds. Model loading took 7.440 milliseconds. These measurements describe one local validation run; they are not a load test, service-level objective, or production guarantee.
+The tracked validation record reports 60 local inference observations with a median of 1.511 milliseconds, a 95th-percentile observation of 1.937 milliseconds, and a maximum of 24.495 milliseconds. Model loading took 4.904 milliseconds. These measurements describe one local validation run; they are not a load test, service-level objective, or production guarantee.
 
 ## Reproducible execution
 

@@ -19,6 +19,29 @@ Use only synthetic or privacy-screened messages during the demonstration. Do not
 
 The model file is intentionally excluded from Git. Its SHA-256 digest and frozen configuration are recorded in `results/metrics/week7_demo_model_metadata.json`.
 
+## Reproducibility-source prerequisite
+
+The model build requires the public Kaggle distribution of the Enron Email
+Dataset because the 1.3 GB raw corpus is intentionally excluded from Git. Follow
+the repository's [`data-preparation instructions`](../README.md#1-prepare-the-data),
+then place the extracted file at:
+
+```text
+data/raw/emails.csv
+```
+
+Verify the source before building:
+
+- Expected columns: `file` and `message`
+- Expected records: 517,401
+- Expected file size: 1,426,122,219 bytes
+- Expected SHA-256: `a605f0a2ca4a4feaa557eb0f2be825914906dca816066d7e58983e7e2e8bd274`
+
+The tracked label manifest at `data/labels/enron_urgency_labels_v1.csv` supplies
+the 199 reviewed message identifiers and urgency labels without publishing
+email text or reviewer notes. The build stops if those identifiers do not
+reproduce the frozen reviewed population.
+
 ## Build and verify
 
 From the repository root:
